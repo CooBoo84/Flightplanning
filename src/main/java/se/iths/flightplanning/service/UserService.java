@@ -24,7 +24,7 @@ public class UserService {
 //        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
         RoleEntity roleToAdd = roleRepository.findByRole("ROLE_ADMIN");
         userEntity.addRole(roleToAdd);
-        return userEntity;
+        return userRepository.save(userEntity);
     }
     public Iterable<UserEntity> findAllUsers() {
         return userRepository.findAll();

@@ -118,6 +118,4 @@ public class UserEntity {
     public void setRouteNames(Set<RouteEntity> routeNames) {
         this.routeNames = routeNames;
     }
-
-
 }
