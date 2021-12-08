@@ -27,6 +27,14 @@ public class UserEntity {
         routeName.getUsers().add(this);
     }
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<RoleEntity> roles = new HashSet<>();
+
+    public void addRole(RoleEntity role) {
+        roles.add(role);
+        role.getUsers().add(this);
+    }
+
     public UserEntity(String firstName, String lastName, String email, String telephone, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -37,15 +45,6 @@ public class UserEntity {
     }
 
     public UserEntity() {
-    }
-
-
-    public Set<RouteEntity> getRouteNames() {
-        return routeNames;
-    }
-
-    public void setRouteNames(Set<RouteEntity> routeNames) {
-        this.routeNames = routeNames;
     }
 
     public Long getId() {
@@ -103,5 +102,22 @@ public class UserEntity {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Set<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleEntity> roles) {
+        this.roles = roles;
+    }
+
+    public Set<RouteEntity> getRouteNames() {
+        return routeNames;
+    }
+
+    public void setRouteNames(Set<RouteEntity> routeNames) {
+        this.routeNames = routeNames;
+    }
+
 
 }
