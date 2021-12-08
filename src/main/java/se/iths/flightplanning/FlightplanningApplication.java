@@ -42,9 +42,9 @@ public class FlightplanningApplication implements CommandLineRunner {
 		WorkerEntity worker = new WorkerEntity(2,8);
 		FoodEntity food= new FoodEntity("Ja");
 		CancellationProtectionEntity cancel = new CancellationProtectionEntity("Ja");
-		RoleEntity role = new RoleEntity("ROLE_VIP");
-
-		user.getRoles().add(role);
+//		RoleEntity role = new RoleEntity("ROLE_VIP");
+//
+//		user.getRoles().add(role);
 		rutt1.setCancel(cancel);
 		rutt1.setFood(food);
 		air1.getStaff().add(worker);

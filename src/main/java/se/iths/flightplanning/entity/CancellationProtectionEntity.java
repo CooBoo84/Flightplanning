@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "cancellationprotection")
 public class CancellationProtectionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String protection;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
