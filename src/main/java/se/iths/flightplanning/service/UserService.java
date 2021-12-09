@@ -2,11 +2,13 @@ package se.iths.flightplanning.service;
 
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+//import se.iths.flightplanning.dto.UserRegistrationDto;
 import se.iths.flightplanning.entity.RoleEntity;
 import se.iths.flightplanning.entity.UserEntity;
 import se.iths.flightplanning.repository.RoleRepository;
 import se.iths.flightplanning.repository.UserRepository;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 @Service
@@ -27,6 +29,18 @@ public class UserService {
         RoleEntity roleToAdd = roleRepository.findByRole("ROLE_ADMIN");
         userEntity.addRole(roleToAdd);
         return userRepository.save(userEntity);
+    }
+
+    public UserEntity save(UserEntity userEntity) {
+        UserEntity user =
+                new UserEntity( userEntity.getFirstName(),
+                                userEntity.getLastName(),
+                                userEntity.getEmail(),
+                                userEntity.getTelephone(),
+                                userEntity.getUsername(),
+                                userEntity.getPassword());
+
+        return userRepository.save(user);
     }
     public Iterable<UserEntity> findAllUsers() {
         return userRepository.findAll();
