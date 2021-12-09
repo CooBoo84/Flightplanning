@@ -20,7 +20,7 @@ public class UserEntity {
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_routes", joinColumns = { @JoinColumn(name = "user_id") },
-    inverseJoinColumns = { @JoinColumn(name = "route_id") })
+            inverseJoinColumns = { @JoinColumn(name = "route_id") })
     private Set<RouteEntity> routeNames = new HashSet<>();
 
     public void addRoute(RouteEntity routeName) {

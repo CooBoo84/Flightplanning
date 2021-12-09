@@ -17,6 +17,7 @@ public class RoleEntity {
     private Set<UserEntity> users;
 
     public RoleEntity(String role) {
+        super();
         this.role = role;
     }
 

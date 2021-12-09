@@ -7,6 +7,8 @@ import se.iths.flightplanning.entity.UserEntity;
 import se.iths.flightplanning.repository.RoleRepository;
 import se.iths.flightplanning.repository.UserRepository;
 
+import java.util.HashSet;
+
 @Service
 public class UserService {
 
