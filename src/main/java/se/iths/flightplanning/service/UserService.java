@@ -1,15 +1,11 @@
 package se.iths.flightplanning.service;
 
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-//import se.iths.flightplanning.dto.UserRegistrationDto;
 import se.iths.flightplanning.entity.RoleEntity;
-import se.iths.flightplanning.entity.UserEntity;
+import se.iths.flightplanning.entity.User;
 import se.iths.flightplanning.repository.RoleRepository;
 import se.iths.flightplanning.repository.UserRepository;
-
-import java.util.Arrays;
-import java.util.HashSet;
 
 @Service
 public class UserService {
@@ -17,32 +13,21 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
-//    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
 
-    public UserEntity createUser(UserEntity userEntity) {
-//        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+    public User createUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         RoleEntity roleToAdd = roleRepository.findByRole("ROLE_ADMIN");
-        userEntity.addRole(roleToAdd);
-        return userRepository.save(userEntity);
-    }
-
-    public UserEntity save(UserEntity userEntity) {
-        UserEntity user =
-                new UserEntity( userEntity.getFirstName(),
-                                userEntity.getLastName(),
-                                userEntity.getEmail(),
-                                userEntity.getTelephone(),
-                                userEntity.getUsername(),
-                                userEntity.getPassword());
-
+        user.addRole(roleToAdd);
         return userRepository.save(user);
     }
-    public Iterable<UserEntity> findAllUsers() {
+
+    public Iterable<User> findAllUsers() {
         return userRepository.findAll();
     }
 

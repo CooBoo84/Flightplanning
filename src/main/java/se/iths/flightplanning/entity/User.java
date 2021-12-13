@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user")
-public class UserEntity {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,7 +36,7 @@ public class UserEntity {
         role.getUsers().add(this);
     }
 
-    public UserEntity(String firstName, String lastName, String email, String telephone, String username, String password) {
+    public User(String firstName, String lastName, String email, String telephone, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -45,7 +45,7 @@ public class UserEntity {
         this.password = password;
     }
 
-    public UserEntity() {
+    public User() {
     }
 
     public Long getId() {

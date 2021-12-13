@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -26,29 +27,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return provider;
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(authenticationProvider());
-//    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .httpBasic()
-                .and()
-                .authorizeRequests()
-                .antMatchers("/", "/home", "/register", "/korv").permitAll()
-                .antMatchers("/admin").hasRole("ADMIN")
+        http.authorizeRequests()
+                .antMatchers("/", "/h2-console/**", "/register").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login").permitAll()
-                .defaultSuccessUrl("/korv.html", true)
+                .formLogin().loginPage("/login").permitAll()
                 .and()
                 .logout()
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .permitAll();
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login").permitAll().permitAll()
+                .and()
+                .httpBasic();
+
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
 }

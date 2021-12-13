@@ -3,7 +3,7 @@ package se.iths.flightplanning.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import se.iths.flightplanning.entity.UserEntity;
+import se.iths.flightplanning.entity.User;
 import se.iths.flightplanning.service.UserService;
 
 
@@ -15,15 +15,14 @@ public class UserController {
 
     public UserController(UserService userService) { this.userService = userService;}
 
-    @PostMapping()
-    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user) {
-        UserEntity createdUser = userService.createUser(user);
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        User createdUser = userService.createUser(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
     @GetMapping()
-    public ResponseEntity<Iterable<UserEntity>> findAllUsers() {
-        Iterable<UserEntity> allUsers = userService.findAllUsers();
+    public ResponseEntity<Iterable<User>> findAllUsers() {
+        Iterable<User> allUsers = userService.findAllUsers();
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
 
