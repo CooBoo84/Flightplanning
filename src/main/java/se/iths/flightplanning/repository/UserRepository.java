@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import se.iths.flightplanning.entity.UserEntity;
 
 @Repository
-public interface UserRepository extends CrudRepository<UserEntity, Long> {
-    UserEntity findByEmail (String email);
+public interface UserRepository extends CrudRepository<UserEntity,Long> {
+    UserEntity findByUsername(String username);
+
 }
