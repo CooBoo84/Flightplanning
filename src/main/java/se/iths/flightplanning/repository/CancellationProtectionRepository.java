@@ -8,4 +8,8 @@ import se.iths.flightplanning.entity.CancellationProtectionEntity;
 public interface CancellationProtectionRepository extends CrudRepository<CancellationProtectionEntity,Long> {
     CancellationProtectionEntity findById(long id);
 
+    void deleteById(long id);
+
+    //void deleteByProtection(String protection);
+
 }

@@ -5,13 +5,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
+// Should we rename WorkerEntity to Crew and
+// pilot -> numberOfPilots,
+// flightAttendant -> numberOfFlightAttendants
+
 @Entity
 public class WorkerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private int pilot;
     private int flightAttendant;
 

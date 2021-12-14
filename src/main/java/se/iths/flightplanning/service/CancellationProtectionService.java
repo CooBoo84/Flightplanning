@@ -1,6 +1,7 @@
 package se.iths.flightplanning.service;
 
 import org.springframework.stereotype.Service;
+import se.iths.flightplanning.entity.AirplaneEntity;
 import se.iths.flightplanning.entity.CancellationProtectionEntity;
 import se.iths.flightplanning.repository.CancellationProtectionRepository;
 
@@ -18,5 +19,15 @@ public class CancellationProtectionService {
 
     public Iterable<CancellationProtectionEntity>findAllProtection(){
         return cancellationProtectionRepository.findAll();
+    }
+
+    public boolean deleteById(long id) {
+        CancellationProtectionEntity foundCancellationEntity = cancellationProtectionRepository.findById(id);
+        if(foundCancellationEntity == null)
+            return false;
+        else {
+            cancellationProtectionRepository.deleteById(id);
+            return true;
+        }
     }
 }

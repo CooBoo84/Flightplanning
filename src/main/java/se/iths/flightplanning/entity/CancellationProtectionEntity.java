@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
+//String protection -> boolean
 @Entity
 public class CancellationProtectionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String protection;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
