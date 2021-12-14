@@ -61,7 +61,6 @@ public class UserEntity {
         this.email = email;
     }
 
-    @JsonIgnore
     public Set<RoleEntity> getRoles() {
         return roles;
     }
