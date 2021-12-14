@@ -3,77 +3,74 @@ package se.iths.flightplanning;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-<<<<<<< HEAD
+
 import org.springframework.context.annotation.Bean;
-=======
+
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
->>>>>>> d705337efabc22873f15df12bfde23dfd2219f3f
+
 import se.iths.flightplanning.entity.*;
 import se.iths.flightplanning.repository.*;
 
 @SpringBootApplication
 public class FlightplanningApplication implements CommandLineRunner {
 
-	public static void main(String[] args) {
-		ConfigurableApplicationContext context = SpringApplication.run(FlightplanningApplication.class, args);
+    public static void main(String[] args) {
+        ConfigurableApplicationContext context = SpringApplication.run(FlightplanningApplication.class, args);
 
-		JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
+        JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
 
-		UserEntity user = new UserEntity("Sven", "Gurka", "sven@gurka.se", "0315756856", "username", "password");
+        CustomerEntity customer = new CustomerEntity("Sven", "Gurka", "sven@gurka.se", "0315756856", "username", "password");
 
-		jmsTemplate.convertAndSend("user", user);
-	}
+        jmsTemplate.convertAndSend("user", customer);
+    }
 
-	AirplaneRepository airplaneRepository;
-	RouteRepository routeRepository;
-	CustomerRepository customerRepository;
-	WorkerRepository workerRepository;
-	FoodRepository foodRepository;
-	RoleRepository roleRepository;
+    AirplaneRepository airplaneRepository;
+    RouteRepository routeRepository;
+    CustomerRepository customerRepository;
+    WorkerRepository workerRepository;
+    FoodRepository foodRepository;
+    RoleRepository roleRepository;
 
-	public FlightplanningApplication(AirplaneRepository airplaneRepository, RouteRepository routeRepository, CustomerRepository customerRepository, WorkerRepository workerRepository, FoodRepository foodRepository, RoleRepository roleRepository) {
-		this.airplaneRepository = airplaneRepository;
-		this.routeRepository = routeRepository;
-		this.customerRepository = customerRepository;
-		this.workerRepository = workerRepository;
-		this.foodRepository = foodRepository;
-		this.roleRepository = roleRepository;
-	}
+    public FlightplanningApplication(AirplaneRepository airplaneRepository, RouteRepository routeRepository, CustomerRepository customerRepository, WorkerRepository workerRepository, FoodRepository foodRepository, RoleRepository roleRepository) {
+        this.airplaneRepository = airplaneRepository;
+        this.routeRepository = routeRepository;
+        this.customerRepository = customerRepository;
+        this.workerRepository = workerRepository;
+        this.foodRepository = foodRepository;
+        this.roleRepository = roleRepository;
+    }
 
-	@Override
-	public void run(String... args) throws Exception {
+    @Override
+    public void run(String... args) throws Exception {
 
-		CustomerEntity user = new CustomerEntity("Hans", "Sandblom", "sdgdfsg@dhdh.se", "089674545", "username", "password");
-		RouteEntity rutt1 = new RouteEntity("Gbg-Sthlm");
-		AirplaneEntity air1 = new AirplaneEntity("Model-101", 100, 10);
-		WorkerEntity worker = new WorkerEntity(2,8);
-		FoodEntity food= new FoodEntity("Ja");
-		CancellationProtectionEntity cancel = new CancellationProtectionEntity("Ja");
+        CustomerEntity customer = new CustomerEntity("Hans", "Sandblom", "sdgdfsg@dhdh.se", "089674545", "username", "password");
+        RouteEntity rutt1 = new RouteEntity("Gbg-Sthlm");
+        AirplaneEntity air1 = new AirplaneEntity("Model-101", 100, 10);
+        WorkerEntity worker = new WorkerEntity(2, 8);
+        FoodEntity food = new FoodEntity("Ja");
+        CancellationProtectionEntity cancel = new CancellationProtectionEntity("Ja");
 //		RoleEntity role = new RoleEntity("ROLE_VIP");
 //
-//		user.getRoles().add(role);
-		rutt1.setCancel(cancel);
-		rutt1.setFood(food);
-		air1.getStaff().add(worker);
-		rutt1.getAirplaneNames().add(air1);
-		user.getRouteNames().add(rutt1);
+//		customer.getRoles().add(role);
+        rutt1.setCancel(cancel);
+        rutt1.setFood(food);
+        air1.getStaff().add(worker);
+        rutt1.getAirplaneNames().add(air1);
+        customer.getRouteNames().add(rutt1);
 
-<<<<<<< HEAD
-		customerRepository.save(user);
-	}
 
-	@Bean
-	public CommandLineRunner setUpRole(RoleRepository roleRepository) {
-		return (args) -> {
-			roleRepository.save(new RoleEntity("ROLE_ADMIN"));
-			roleRepository.save(new RoleEntity("ROLE_USER"));
-			roleRepository.save(new RoleEntity("ROLE_VIP"));
-		};
-=======
-		userRepository.save(user);
+        customerRepository.save(customer);
+    }
 
->>>>>>> d705337efabc22873f15df12bfde23dfd2219f3f
-	}
+    @Bean
+    public CommandLineRunner setUpRole(RoleRepository roleRepository) {
+        return (args) -> {
+            roleRepository.save(new RoleEntity("ROLE_ADMIN"));
+            roleRepository.save(new RoleEntity("ROLE_USER"));
+            roleRepository.save(new RoleEntity("ROLE_VIP"));
+        };
+
+    }
 
 }
