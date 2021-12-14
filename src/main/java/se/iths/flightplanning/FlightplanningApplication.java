@@ -3,7 +3,12 @@ package se.iths.flightplanning;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+<<<<<<< HEAD
 import org.springframework.context.annotation.Bean;
+=======
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.jms.core.JmsTemplate;
+>>>>>>> d705337efabc22873f15df12bfde23dfd2219f3f
 import se.iths.flightplanning.entity.*;
 import se.iths.flightplanning.repository.*;
 
@@ -11,7 +16,13 @@ import se.iths.flightplanning.repository.*;
 public class FlightplanningApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FlightplanningApplication.class, args);
+		ConfigurableApplicationContext context = SpringApplication.run(FlightplanningApplication.class, args);
+
+		JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
+
+		UserEntity user = new UserEntity("Sven", "Gurka", "sven@gurka.se", "0315756856", "username", "password");
+
+		jmsTemplate.convertAndSend("user", user);
 	}
 
 	AirplaneRepository airplaneRepository;
@@ -48,6 +59,7 @@ public class FlightplanningApplication implements CommandLineRunner {
 		rutt1.getAirplaneNames().add(air1);
 		user.getRouteNames().add(rutt1);
 
+<<<<<<< HEAD
 		customerRepository.save(user);
 	}
 
@@ -58,5 +70,10 @@ public class FlightplanningApplication implements CommandLineRunner {
 			roleRepository.save(new RoleEntity("ROLE_USER"));
 			roleRepository.save(new RoleEntity("ROLE_VIP"));
 		};
+=======
+		userRepository.save(user);
+
+>>>>>>> d705337efabc22873f15df12bfde23dfd2219f3f
 	}
+
 }
