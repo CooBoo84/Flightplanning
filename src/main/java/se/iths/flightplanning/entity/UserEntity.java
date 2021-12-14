@@ -18,28 +18,13 @@ public class UserEntity {
     private String email;
 
 
-<<<<<<< HEAD
+
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<RoleEntity> roles = new HashSet<>();
-=======
-    public UserEntity(String firstName, String lastName, String email, String telephone, String username, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.telephone = telephone;
-        this.username = username;
-        this.password = password;
-    }
 
-    public UserEntity() {
-    }
 
-    public void addRoute(RouteEntity routeName) {
-        routeNames.add(routeName);
-        routeName.getUsers().add(this);
-    }
->>>>>>> d705337efabc22873f15df12bfde23dfd2219f3f
+
 
     public void addRole(RoleEntity role) {
         roles.add(role);
