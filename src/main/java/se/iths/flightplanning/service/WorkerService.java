@@ -1,6 +1,7 @@
 package se.iths.flightplanning.service;
 
 import org.springframework.stereotype.Service;
+import se.iths.flightplanning.entity.AirplaneEntity;
 import se.iths.flightplanning.entity.WorkerEntity;
 import se.iths.flightplanning.repository.WorkerRepository;
 
@@ -23,15 +24,12 @@ public class WorkerService {
         return workerRepository.findAll();
     }
 
-    public boolean deleteWorkerById(long id) {
-        WorkerEntity foundWorker = workerRepository.findById(id);
-        if (foundWorker == null)
-            return false;
-        else {
-            workerRepository.deleteById(id);
-            return true;
-        }
+    public void deleteWorkerById(Long id) {
+        WorkerEntity foundAirplane = workerRepository.findAllByAirplane_Id(id);
+        workerRepository.deleteById(foundAirplane.getId());
     }
+
+
 
     public Optional<WorkerEntity> findWorkerById(Long id) {
         return workerRepository.findById(id);

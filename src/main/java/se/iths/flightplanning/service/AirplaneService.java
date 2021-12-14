@@ -6,6 +6,7 @@ import se.iths.flightplanning.entity.AirplaneEntity;
 import se.iths.flightplanning.repository.AirplaneRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
 
 
 @Service
@@ -33,13 +34,13 @@ public class AirplaneService {
         return airplaneRepository.findByAirplaneName(airplaneName);
     }
 
-    public void deleteAirplaneById(long id) {
+    public void deleteAirplaneById(Long id) {
         AirplaneEntity foundAirplane = airplaneRepository.findAirplaneEntityById(id);
-        airplaneRepository.deleteAirplaneEntityById(foundAirplane.getId());
+        airplaneRepository.deleteById(foundAirplane.getId());
     }
 
-    public void deleteAirplaneByName(String name) {
+    /*public void deleteAirplaneByName(String name) {
         airplaneRepository.deleteAirplaneEntityByAirplaneName(name);
-    }
+    }*/
 
 }

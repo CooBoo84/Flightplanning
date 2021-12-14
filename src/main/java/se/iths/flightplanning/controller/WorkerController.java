@@ -27,4 +27,10 @@ public class WorkerController {
         Iterable<WorkerEntity> allStaff = workerService.findAllStaff();
         return new ResponseEntity<>(allStaff, HttpStatus.OK);
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteWorkerById(@PathVariable Long id) {
+        workerService.deleteWorkerById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

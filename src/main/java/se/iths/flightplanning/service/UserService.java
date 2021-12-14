@@ -30,28 +30,21 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public boolean deleteUserById(long id) {
-        UserEntity foundUser = userRepository.findById(id);
-        if (foundUser == null)
-            return false;
-        else {
-            userRepository.deleteById(id);
-            return true;
-        }
+    public UserEntity findUserById(Long id) {
+        return userRepository.findUserEntityById(id);
     }
 
-    public boolean deleteUserByEmail(String email) {
-        UserEntity foundUser = userRepository.findByEmail(email);
-        if (foundUser == null)
-            return false;
-        else {
-            userRepository.deleteById(foundUser.getId());
-            return true;
-        }
+    public UserEntity findUserByUsername(String username) {
+        return  userRepository.findUserEntityByUsername(username);
+    }
+
+    public UserEntity findUserByEmail(String email) {
+        return  userRepository.findUserEntityByEmail(email);
     }
 
 
-    public Optional<UserEntity> findUserById(Long id) {
-        return userRepository.findById(id);
-    }
+
+    //public Optional<UserEntity> findUserById(Long id) {
+    //    return userRepository.findById(id);
+    //}
 }

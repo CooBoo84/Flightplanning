@@ -9,10 +9,7 @@ import se.iths.flightplanning.entity.WorkerEntity;
 public interface WorkerRepository extends CrudRepository<WorkerEntity, Long> {
     WorkerEntity findById(long id);
 
-    WorkerEntity findByAirplane_AirplaneName(String airplaneName);
+    WorkerEntity findAllByAirplane_Id(long id);
 
-    void deleteById(long id);
-
-    //void deleteByPilot(int pilot);
-    //void deleteByFlightAttendant(int flightAttendant);
+    WorkerEntity findAllByAirplane_AirplaneName(String name);
 }

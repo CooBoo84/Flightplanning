@@ -11,8 +11,4 @@ public interface AirplaneRepository extends CrudRepository<AirplaneEntity, Long>
 
     AirplaneEntity findByAirplaneName(String airplaneName);
 
-    void deleteAirplaneEntityById(long id);
-
-    void deleteAirplaneEntityByAirplaneName(String airplaneName);
-
 }

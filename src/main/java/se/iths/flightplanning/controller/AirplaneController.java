@@ -6,10 +6,12 @@ import org.springframework.web.bind.annotation.*;
 import se.iths.flightplanning.entity.AirplaneEntity;
 
 
+import se.iths.flightplanning.exception.NoContentException;
 import se.iths.flightplanning.exception.NoRecordFoundException;
 import se.iths.flightplanning.service.AirplaneService;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("airplanes")
@@ -51,11 +53,10 @@ public class AirplaneController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteAirplaneById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteAnAirplaneById(@PathVariable Long id) {
         airplaneService.deleteAirplaneById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 
     @GetMapping("/")
     @ResponseBody

@@ -6,11 +6,10 @@ import se.iths.flightplanning.entity.UserEntity;
 
 @Repository
 public interface UserRepository extends CrudRepository<UserEntity, Long> {
-    UserEntity findByEmail (String email);
+    UserEntity findUserEntityById(long id);
 
-    UserEntity findById(long id);
+    UserEntity findUserEntityByEmail(String email);
 
-    boolean deleteById(long id);
+    UserEntity findUserEntityByUsername(String userName);
 
-    //void deleteByEmail(String email);
 }
