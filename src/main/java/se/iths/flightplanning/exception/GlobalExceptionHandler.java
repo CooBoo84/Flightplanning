@@ -23,7 +23,14 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> emptyListHandling(EmptyListException exception, WebRequest request){
         ErrorDetails errorDetails =
                 new ErrorDetails(new Date(), exception.getMessage());
-        return new ResponseEntity<>(errorDetails, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(errorDetails, HttpStatus.SEE_OTHER);
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<?> emptyListHandling(AuthenticationException exception, WebRequest request){
+        ErrorDetails errorDetails =
+                new ErrorDetails(new Date(), exception.getMessage());
+        return new ResponseEntity<>(errorDetails, HttpStatus.UNAUTHORIZED);
     }
 
     // Default exception
