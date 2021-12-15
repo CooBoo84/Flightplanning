@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import se.iths.flightplanning.entity.AirplaneEntity;
 
 
+import se.iths.flightplanning.exception.EmptyListException;
 import se.iths.flightplanning.exception.ResourceNotFoundException;
 import se.iths.flightplanning.service.AirplaneService;
 
@@ -27,7 +28,10 @@ public class AirplaneController {
     @GetMapping()
     public ResponseEntity<Iterable<AirplaneEntity>> findAllPlanes() {
         Iterable<AirplaneEntity> allPlanes = airplaneService.findAllPlanes();
-        return new ResponseEntity<>(allPlanes, HttpStatus.OK);
+        if (allPlanes.iterator().hasNext())
+            return new ResponseEntity<>(allPlanes, HttpStatus.OK);
+        else
+            throw new EmptyListException("Airplane list is empty.");
     }
 
     @GetMapping("{id}")
