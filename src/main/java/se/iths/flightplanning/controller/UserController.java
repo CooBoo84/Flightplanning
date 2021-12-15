@@ -3,9 +3,7 @@ package se.iths.flightplanning.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import se.iths.flightplanning.entity.AirplaneEntity;
 import se.iths.flightplanning.entity.UserEntity;
-import se.iths.flightplanning.exception.NoRecordFoundException;
 import se.iths.flightplanning.service.UserService;
 
 
@@ -33,7 +31,7 @@ public class UserController {
     public ResponseEntity<UserEntity> findUserById(@PathVariable Long id) {
         UserEntity foundUser = userService.findUserById(id);
         if (foundUser == null) {
-            throw new NoRecordFoundException();
+            //throw new NoRecordFoundException();
         }
         return new ResponseEntity<>(foundUser, HttpStatus.OK);
     }
@@ -42,7 +40,7 @@ public class UserController {
     public ResponseEntity<UserEntity> findUserByUsername(@RequestParam String username) {
         UserEntity foundUser = userService.findUserByUsername(username);
         if (foundUser == null) {
-            throw new NoRecordFoundException();
+            //throw new NoRecordFoundException();
         }
         return new ResponseEntity<>(foundUser, HttpStatus.OK);
     }
@@ -51,9 +49,15 @@ public class UserController {
     public ResponseEntity<UserEntity> findUserByEmail(@RequestParam String email) {
         UserEntity foundUser = userService.findUserByEmail(email);
         if (foundUser == null) {
-            throw new NoRecordFoundException();
+            //throw new NoRecordFoundException();
         }
         return new ResponseEntity<>(foundUser, HttpStatus.OK);
+    }
+
+    @DeleteMapping("")
+    public ResponseEntity<Void> deleteUserByUsername(@RequestParam String username) {
+        userService.deleteUserByUsername(username);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 /*
 

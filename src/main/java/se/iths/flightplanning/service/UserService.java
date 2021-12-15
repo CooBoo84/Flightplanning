@@ -42,6 +42,11 @@ public class UserService {
         return  userRepository.findUserEntityByEmail(email);
     }
 
+    public void deleteUserByUsername(String username) {
+        UserEntity foundUser = userRepository.findUserEntityByUsername(username);
+        userRepository.deleteById(foundUser.getId());
+    }
+
 
 
     //public Optional<UserEntity> findUserById(Long id) {

@@ -6,12 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import se.iths.flightplanning.entity.AirplaneEntity;
 
 
-import se.iths.flightplanning.exception.NoContentException;
-import se.iths.flightplanning.exception.NoRecordFoundException;
+import se.iths.flightplanning.exception.ResourceNotFoundException;
 import se.iths.flightplanning.service.AirplaneService;
-
-import javax.persistence.EntityNotFoundException;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("airplanes")
@@ -38,7 +34,7 @@ public class AirplaneController {
     public ResponseEntity<AirplaneEntity> findAnAirplaneById(@PathVariable Long id) {
         AirplaneEntity foundAirplane = airplaneService.findById(id);
         if (foundAirplane == null) {
-            throw new NoRecordFoundException();
+            throw new ResourceNotFoundException("Airplane with id: " + id + " not found.");
         }
         return new ResponseEntity<>(foundAirplane, HttpStatus.OK);
     }
@@ -47,7 +43,7 @@ public class AirplaneController {
     public ResponseEntity<AirplaneEntity> findAirplaneByName(@RequestParam String name) {
         AirplaneEntity foundAirplane = airplaneService.findByName(name);
         if (foundAirplane == null) {
-            throw new NoRecordFoundException();
+            throw new ResourceNotFoundException("Airplane with name: " + name + " not found.");
         }
         return new ResponseEntity<>(foundAirplane, HttpStatus.OK);
     }
