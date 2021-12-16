@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 //String protection -> boolean
 @Entity
+@Table(name = "cancellationprotection")
 public class CancellationProtectionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

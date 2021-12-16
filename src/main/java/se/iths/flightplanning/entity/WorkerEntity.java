@@ -10,6 +10,7 @@ import javax.persistence.*;
 // flightAttendant -> numberOfFlightAttendants
 
 @Entity
+@Table(name = "worker")
 public class WorkerEntity {
 
     @Id

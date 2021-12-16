@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "route")
 public class RouteEntity {
 
     @Id
@@ -16,7 +17,7 @@ public class RouteEntity {
 
 
     @ManyToMany(mappedBy = "routeNames", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<UserEntity> users;
+    private Set<CustomerEntity> users;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<AirplaneEntity> airplaneNames = new HashSet<>();
@@ -69,11 +70,11 @@ public class RouteEntity {
     }
 
     @JsonIgnore
-    public Set<UserEntity> getUsers() {
+    public Set<CustomerEntity> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<UserEntity> users) {
+    public void setUsers(Set<CustomerEntity> users) {
         this.users = users;
     }
 
