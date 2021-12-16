@@ -4,15 +4,21 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import org.springframework.boot.autoconfigure.web.ConditionalOnEnabledResourceChain;
 import org.springframework.context.annotation.Bean;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 
+import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import se.iths.flightplanning.entity.*;
 import se.iths.flightplanning.repository.*;
 
 @SpringBootApplication
+@EnableAuthorizationServer
+@EnableResourceServer
 public class FlightplanningApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
