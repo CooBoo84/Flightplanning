@@ -14,11 +14,18 @@ public class AirplaneMapper {
     }
 
     public AirplaneDto mapp(AirplaneEntity airplaneEntity) {
-        return new AirplaneDto(airplaneEntity.getId(), airplaneEntity.getAirplaneName(), airplaneEntity.getNumberOfSeat(), airplaneEntity.getNumberOfStaff());
+        return new AirplaneDto(airplaneEntity.getId(),
+                airplaneEntity.getAirplaneName(),
+                airplaneEntity.getNumberOfSeat(),
+                airplaneEntity.getNumberOfStaff());
     }
 
     public AirplaneEntity mapp(AirplaneDto airplaneDto) {
-        return new AirplaneEntity(airplaneDto.getId(), airplaneDto.getAirplaneName(), airplaneDto.getNumberOfSeat(), airplaneDto.getNumberOfStaff());
+        return new AirplaneEntity(
+                airplaneDto.getId(),
+                airplaneDto.getAirplaneName(),
+                airplaneDto.getNumberOfSeat(),
+                airplaneDto.getNumberOfStaff());
     }
 
     public Optional<AirplaneDto> mapp(Optional<AirplaneEntity> optionalAirplaneEntity) {
