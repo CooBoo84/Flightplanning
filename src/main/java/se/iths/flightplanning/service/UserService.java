@@ -4,17 +4,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import se.iths.flightplanning.entity.RoleEntity;
 import se.iths.flightplanning.entity.UserEntity;
-import se.iths.flightplanning.repository.RoleRepository;
+import se.iths.flightplanning.entity.WorkerEntity;
+import se.iths.flightplanning.repository.AirplaneRepository;
+import se.iths.flightplanning.repository.RouteRepository;
 import se.iths.flightplanning.repository.UserRepository;
-
-import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public UserService(UserRepository userRepository , RoleRepository roleRepository){
@@ -30,7 +29,8 @@ public class UserService {
     }
 
     public void deleteUser(Long id){
-        UserEntity foundUser = userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        UserEntity foundUser = userRepository.findById(id);
+          //.orElseThrow(EntityNotFoundException::new);
         userRepository.deleteById(foundUser.getId());
     }
 
@@ -42,3 +42,4 @@ public class UserService {
         return userRepository.findAll();
     }
 }
+

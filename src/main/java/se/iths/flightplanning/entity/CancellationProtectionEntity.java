@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
+//String protection -> boolean
 @Entity
 @Table(name = "cancellationprotection")
 public class CancellationProtectionEntity {
