@@ -3,10 +3,10 @@ package se.iths.flightplanning.dto;
 
 public class FoodDto {
 
-    private Long id;
+    private long id;
     private String food;
 
-    public FoodDto(Long id, String food) {
+    public FoodDto(long id, String food) {
         this.id = id;
         this.food = food;
     }
@@ -14,11 +14,11 @@ public class FoodDto {
     public FoodDto() {
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
