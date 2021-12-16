@@ -3,31 +3,29 @@ package se.iths.flightplanning.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import se.iths.flightplanning.entity.AirplaneEntity;
-
-
+import org.springframework.web.server.ResponseStatusException;
+import se.iths.flightplanning.dto.AirplaneDto;
 import se.iths.flightplanning.exception.EmptyListException;
-import se.iths.flightplanning.exception.ResourceNotFoundException;
-import se.iths.flightplanning.service.AirplaneService;
+import se.iths.flightplanning.service.AirplaneServiceDto;
 
 @RestController
 @RequestMapping("airplanes")
 public class AirplaneController {
 
-    private final AirplaneService airplaneService;
+    private final AirplaneServiceDto airplaneServiceDto;
 
-    public AirplaneController(AirplaneService airplaneService) {
-        this.airplaneService = airplaneService;
+    public AirplaneController(AirplaneServiceDto airplaneServiceDto) {
+        this.airplaneServiceDto = airplaneServiceDto;
     }
 
     @PostMapping()
-    public ResponseEntity<AirplaneEntity> createPlane(@RequestBody AirplaneEntity airplaneEntity) {
-        AirplaneEntity createdPlane = airplaneService.createPlane(airplaneEntity);
+    public ResponseEntity<AirplaneDto> createPlane(@RequestBody AirplaneDto airplaneDto) {
+        AirplaneDto createdPlane = airplaneServiceDto.createPlane(airplaneDto);
         return new ResponseEntity<>(createdPlane, HttpStatus.CREATED);
     }
     @GetMapping()
-    public ResponseEntity<Iterable<AirplaneEntity>> findAllPlanes() {
-        Iterable<AirplaneEntity> allPlanes = airplaneService.findAllPlanes();
+    public ResponseEntity<Iterable<AirplaneDto>> findAllPlanes() {
+        Iterable<AirplaneDto> allPlanes = airplaneServiceDto.findAllPlanes();
         if (allPlanes.iterator().hasNext())
             return new ResponseEntity<>(allPlanes, HttpStatus.OK);
         else
@@ -35,26 +33,15 @@ public class AirplaneController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<AirplaneEntity> findAnAirplaneById(@PathVariable Long id) {
-        AirplaneEntity foundAirplane = airplaneService.findById(id);
-        if (foundAirplane == null) {
-            throw new ResourceNotFoundException("Airplane with id: " + id + " not found.");
-        }
-        return new ResponseEntity<>(foundAirplane, HttpStatus.OK);
-    }
-
-    @GetMapping("/name")
-    public ResponseEntity<AirplaneEntity> findAirplaneByName(@RequestParam String name) {
-        AirplaneEntity foundAirplane = airplaneService.findByName(name);
-        if (foundAirplane == null) {
-            throw new ResourceNotFoundException("Airplane with name: " + name + " not found.");
-        }
-        return new ResponseEntity<>(foundAirplane, HttpStatus.OK);
+    public AirplaneDto findAirplaneById(@PathVariable Long id) {
+        return airplaneServiceDto.getAirplaneById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "Id " + id + " not found."));
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteAnAirplaneById(@PathVariable Long id) {
-        airplaneService.deleteAirplaneById(id);
+        airplaneServiceDto.deleteAirplaneById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

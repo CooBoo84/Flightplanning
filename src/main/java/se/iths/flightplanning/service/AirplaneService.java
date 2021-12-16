@@ -1,46 +1,44 @@
 package se.iths.flightplanning.service;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import se.iths.flightplanning.entity.AirplaneEntity;
+import se.iths.flightplanning.dto.AirplaneDto;
+import se.iths.flightplanning.mappers.AirplaneMapper;
 import se.iths.flightplanning.repository.AirplaneRepository;
 
-import javax.persistence.EntityNotFoundException;
+import java.util.List;
 import java.util.Optional;
 
 
 @Service
-public class AirplaneService {
+public class AirplaneService implements AirplaneServiceDto {
 
     private final AirplaneRepository airplaneRepository;
+    private final AirplaneMapper airplaneMapper;
 
-    public AirplaneService(AirplaneRepository airplaneRepository) {
+    public AirplaneService(AirplaneRepository airplaneRepository, AirplaneMapper airplaneMapper) {
         this.airplaneRepository = airplaneRepository;
+        this.airplaneMapper = airplaneMapper;
     }
 
-    public AirplaneEntity createPlane(AirplaneEntity airplaneEntity) {
-        return airplaneRepository.save(airplaneEntity);
+    @Override
+    public AirplaneDto createPlane(AirplaneDto airplaneDto) {
+        if (airplaneDto.getAirplaneName().isEmpty())
+            throw new RuntimeException();
+        return airplaneMapper.mapp(airplaneRepository.save(airplaneMapper.mapp(airplaneDto)));
     }
 
-    public Iterable<AirplaneEntity> findAllPlanes() {
-        return airplaneRepository.findAll();
+    @Override
+    public List<AirplaneDto> findAllPlanes() {
+        return airplaneMapper.mapp(airplaneRepository.findAll());
     }
 
-    public AirplaneEntity findById(Long id) {
-        return airplaneRepository.findAirplaneEntityById(id);
+    @Override
+    public Optional<AirplaneDto> getAirplaneById(Long id) {
+        return airplaneMapper.mapp(airplaneRepository.findById(id));
     }
 
-    public AirplaneEntity findByName(String airplaneName) {
-        return airplaneRepository.findByAirplaneName(airplaneName);
-    }
-
+    @Override
     public void deleteAirplaneById(Long id) {
-        AirplaneEntity foundAirplane = airplaneRepository.findAirplaneEntityById(id);
-        airplaneRepository.deleteById(foundAirplane.getId());
+        airplaneRepository.deleteById(id);
     }
-
-    /*public void deleteAirplaneByName(String name) {
-        airplaneRepository.deleteAirplaneEntityByAirplaneName(name);
-    }*/
-
 }

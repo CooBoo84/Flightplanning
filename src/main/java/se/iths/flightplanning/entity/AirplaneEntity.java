@@ -13,7 +13,7 @@ public class AirplaneEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
     private String airplaneName;
     private int numberOfSeat;
     private int numberOfStaff;
@@ -25,7 +25,8 @@ public class AirplaneEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<WorkerEntity> staff = new HashSet<>();
 
-    public AirplaneEntity(String airplaneName, int numberOfSeat, int numberOfStaff) {
+    public AirplaneEntity(long id, String airplaneName, int numberOfSeat, int numberOfStaff) {
+        this.id = id;
         this.airplaneName = airplaneName;
         this.numberOfSeat = numberOfSeat;
         this.numberOfStaff = numberOfStaff;
@@ -34,11 +35,11 @@ public class AirplaneEntity {
     public AirplaneEntity() {
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
