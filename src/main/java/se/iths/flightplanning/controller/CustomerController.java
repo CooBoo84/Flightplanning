@@ -3,27 +3,29 @@ package se.iths.flightplanning.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import se.iths.flightplanning.entity.CustomerEntity;
-import se.iths.flightplanning.service.CustomerService;
+import se.iths.flightplanning.dto.CustomerDto;
+import se.iths.flightplanning.service.CustomerServiceDto;
 
 
 @RestController
 @RequestMapping("customers")
 public class CustomerController {
 
-    private final CustomerService customerService;
+    private final CustomerServiceDto customerServiceDto;
 
-    public CustomerController(CustomerService customerService) { this.customerService = customerService;}
+    public CustomerController(CustomerServiceDto customerServiceDto) {
+        this.customerServiceDto = customerServiceDto;
+    }
 
     @PostMapping()
-    public ResponseEntity<CustomerEntity> createUser(@RequestBody CustomerEntity user) {
-        CustomerEntity createdUser = customerService.createUser(user);
-        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+    public ResponseEntity<CustomerDto> createCustomer(@RequestBody CustomerDto customerDto) {
+        CustomerDto createdCustomer = customerServiceDto.createCustomer(customerDto);
+        return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
     }
 
     @GetMapping()
-    public ResponseEntity<Iterable<CustomerEntity>> findAllUsers() {
-        Iterable<CustomerEntity> allUsers = customerService.findAllUsers();
+    public ResponseEntity<Iterable<CustomerDto>> findAllUsers() {
+        Iterable<CustomerDto> allUsers = customerServiceDto.findAllCustomers();
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
 

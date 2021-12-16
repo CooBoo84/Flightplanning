@@ -3,34 +3,34 @@ package se.iths.flightplanning.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import se.iths.flightplanning.entity.WorkerEntity;
-import se.iths.flightplanning.service.WorkerService;
+import se.iths.flightplanning.dto.WorkerDto;
+import se.iths.flightplanning.service.WorkerServiceDto;
 
 @RestController
 @RequestMapping("staff")
 public class WorkerController {
 
-    private final WorkerService workerService;
+    private final WorkerServiceDto workerServiceDto;
 
-    public WorkerController(WorkerService workerService) {
-        this.workerService = workerService;
+    public WorkerController(WorkerServiceDto workerServiceDto) {
+        this.workerServiceDto = workerServiceDto;
     }
 
     @PostMapping()
-    public ResponseEntity<WorkerEntity> createWorker(@RequestBody WorkerEntity workerEntity) {
-        WorkerEntity createdWorker = workerService.createWorker(workerEntity);
+    public ResponseEntity<WorkerDto> createWorker(@RequestBody WorkerDto workerDto) {
+        WorkerDto createdWorker = workerServiceDto.createWorker(workerDto);
         return new ResponseEntity<>(createdWorker, HttpStatus.CREATED);
     }
 
     @GetMapping()
-    public ResponseEntity<Iterable<WorkerEntity>> findAllStaff() {
-        Iterable<WorkerEntity> allStaff = workerService.findAllStaff();
+    public ResponseEntity<Iterable<WorkerDto>> findAllStaff() {
+        Iterable<WorkerDto> allStaff = workerServiceDto.findAllStaff();
         return new ResponseEntity<>(allStaff, HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteWorkerById(@PathVariable Long id) {
-        workerService.deleteWorkerById(id);
+        workerServiceDto.deleteWorkerById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

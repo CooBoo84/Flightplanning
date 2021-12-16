@@ -1,38 +1,38 @@
 package se.iths.flightplanning.service;
 
 import org.springframework.stereotype.Service;
-import se.iths.flightplanning.entity.AirplaneEntity;
-import se.iths.flightplanning.entity.WorkerEntity;
+import se.iths.flightplanning.dto.WorkerDto;
+import se.iths.flightplanning.mappers.WorkerMapper;
 import se.iths.flightplanning.repository.WorkerRepository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
-public class WorkerService {
+public class WorkerService implements WorkerServiceDto{
 
     private final WorkerRepository workerRepository;
+    private final WorkerMapper workerMapper;
 
-    public WorkerService(WorkerRepository workerRepository) {
+    public WorkerService(WorkerRepository workerRepository, WorkerMapper workerMapper) {
         this.workerRepository = workerRepository;
+        this.workerMapper = workerMapper;
     }
 
-    public WorkerEntity createWorker(WorkerEntity workerEntity){
-        return workerRepository.save(workerEntity);
+    @Override
+    public WorkerDto createWorker(WorkerDto workerDto){
+        return workerMapper.mapp(workerRepository.save(workerMapper.mapp(workerDto)));
     }
 
-    public Iterable<WorkerEntity> findAllStaff() {
-        return workerRepository.findAll();
+    @Override
+    public List<WorkerDto> findAllStaff() {
+
+        return workerMapper.mapp(workerRepository.findAll());
     }
 
+    @Override
     public void deleteWorkerById(Long id) {
-        WorkerEntity foundAirplane = workerRepository.findAllByAirplane_Id(id);
-        workerRepository.deleteById(foundAirplane.getId());
+        workerRepository.deleteById(id);
     }
 
-
-
-    public Optional<WorkerEntity> findWorkerById(Long id) {
-        return workerRepository.findById(id);
-    }
 
 }

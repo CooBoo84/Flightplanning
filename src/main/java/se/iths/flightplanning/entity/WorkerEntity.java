@@ -27,7 +27,7 @@ public class WorkerEntity {
         this.flightAttendant = flightAttendant;
     }
 
-    public WorkerEntity() {
+    public WorkerEntity(Long id, int pilot, int flightAttendant) {
     }
 
     public Long getId() {
