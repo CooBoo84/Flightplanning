@@ -3,12 +3,12 @@ package se.iths.flightplanning.dto;
 
 public class AirplaneDto {
 
-    private Long id;
+    private long id;
     private String airplaneName;
     private int numberOfSeat;
     private int numberOfStaff;
 
-    public AirplaneDto(Long id, String airplaneName, int numberOfSeat, int numberOfStaff) {
+    public AirplaneDto(long id, String airplaneName, int numberOfSeat, int numberOfStaff) {
         this.id = id;
         this.airplaneName = airplaneName;
         this.numberOfSeat = numberOfSeat;
@@ -18,11 +18,11 @@ public class AirplaneDto {
     public AirplaneDto() {
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

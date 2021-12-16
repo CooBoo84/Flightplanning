@@ -1,14 +1,19 @@
 package se.iths.flightplanning.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import se.iths.flightplanning.dto.AirplaneDto;
 import se.iths.flightplanning.entity.AirplaneEntity;
 
+import java.util.List;
+
 @Repository
-public interface AirplaneRepository extends CrudRepository<AirplaneEntity, Long> {
+public interface AirplaneRepository extends JpaRepository<AirplaneEntity, Long> {
 
-    AirplaneEntity findAirplaneEntityById(long id);
+    List<AirplaneEntity> findAllById(long id);
 
-    AirplaneEntity findByAirplaneName(String airplaneName);
+    AirplaneDto findAirplaneById(long id);
+    AirplaneDto findByAirplaneName(String airplaneName);
 
 }
