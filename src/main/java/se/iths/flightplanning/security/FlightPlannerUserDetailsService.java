@@ -20,7 +20,7 @@ public class FlightPlannerUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity userEntity = userRepository.findByUsername(username);
+        UserEntity userEntity = userRepository.findUserEntityByUsername(username);
 
         if (userEntity == null) {
             System.out.println("Can´t find user with username: " + username);

@@ -36,11 +36,6 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Optional<UserEntity>> findUserById(@PathVariable Long id) {
-        Optional<UserEntity> foundUser = userService.findUserById(id);
-        return new ResponseEntity<>(foundUser, HttpStatus.OK);
-    }
 
     @GetMapping
     public ResponseEntity<Iterable<UserEntity>> findAllUsers() {

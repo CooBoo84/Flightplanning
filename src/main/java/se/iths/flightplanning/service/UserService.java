@@ -6,8 +6,11 @@ import se.iths.flightplanning.entity.RoleEntity;
 import se.iths.flightplanning.entity.UserEntity;
 import se.iths.flightplanning.entity.WorkerEntity;
 import se.iths.flightplanning.repository.AirplaneRepository;
+import se.iths.flightplanning.repository.RoleRepository;
 import se.iths.flightplanning.repository.RouteRepository;
 import se.iths.flightplanning.repository.UserRepository;
+
+import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
@@ -29,17 +32,29 @@ public class UserService {
     }
 
     public void deleteUser(Long id){
-        UserEntity foundUser = userRepository.findById(id);
-          //.orElseThrow(EntityNotFoundException::new);
+        UserEntity foundUser = userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         userRepository.deleteById(foundUser.getId());
     }
 
-    public Optional<UserEntity> findUserById(Long id){
-        return userRepository.findById(id);
+    public Iterable<UserEntity> findAllUsers() {
+        return userRepository.findAll();
     }
 
-    public Iterable<UserEntity> findAllUsers(){
-        return userRepository.findAll();
+    public UserEntity findUserById(Long id) {
+        return userRepository.findUserEntityById(id);
+    }
+
+    public UserEntity findUserByUsername(String username) {
+        return  userRepository.findUserEntityByUsername(username);
+    }
+
+    public UserEntity findUserByEmail(String email) {
+        return  userRepository.findUserEntityByEmail(email);
+    }
+
+    public void deleteUserByUsername(String username) {
+        UserEntity foundUser = userRepository.findUserEntityByUsername(username);
+        userRepository.deleteById(foundUser.getId());
     }
 }
 
