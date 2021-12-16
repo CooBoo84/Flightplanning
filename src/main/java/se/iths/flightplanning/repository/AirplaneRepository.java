@@ -12,8 +12,4 @@ import java.util.List;
 public interface AirplaneRepository extends JpaRepository<AirplaneEntity, Long> {
 
     List<AirplaneEntity> findAllById(long id);
-
-    AirplaneDto findAirplaneById(long id);
-    AirplaneDto findByAirplaneName(String airplaneName);
-
 }

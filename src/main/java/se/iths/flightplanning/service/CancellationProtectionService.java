@@ -1,33 +1,36 @@
 package se.iths.flightplanning.service;
 
 import org.springframework.stereotype.Service;
-import se.iths.flightplanning.entity.AirplaneEntity;
-import se.iths.flightplanning.entity.CancellationProtectionEntity;
+import se.iths.flightplanning.dto.CancellationProtectionDto;
+import se.iths.flightplanning.mappers.CancellationProtectionMapper;
 import se.iths.flightplanning.repository.CancellationProtectionRepository;
+
+import java.util.List;
 
 
 @Service
-public class CancellationProtectionService {
+public class CancellationProtectionService implements CancellationProtectionServiceDto {
+
     private final CancellationProtectionRepository cancellationProtectionRepository;
+    private final CancellationProtectionMapper cancellationProtectionMapper;
 
-    public CancellationProtectionService(CancellationProtectionRepository cancellationProtectionRepository){
+    public CancellationProtectionService(CancellationProtectionRepository cancellationProtectionRepository, CancellationProtectionMapper cancellationProtectionMapper){
         this.cancellationProtectionRepository = cancellationProtectionRepository;
-    }
-    public CancellationProtectionEntity createProtection(CancellationProtectionEntity cancellationProtectionEntity){
-        return cancellationProtectionRepository.save(cancellationProtectionEntity);
+        this.cancellationProtectionMapper = cancellationProtectionMapper;
     }
 
-    public Iterable<CancellationProtectionEntity>findAllProtection(){
-        return cancellationProtectionRepository.findAll();
+    @Override
+    public CancellationProtectionDto createProtection(CancellationProtectionDto cancellationProtectionDto){
+        return cancellationProtectionMapper.mapp(cancellationProtectionRepository.save(cancellationProtectionMapper.mapp(cancellationProtectionDto)));
     }
 
-    public boolean deleteById(long id) {
-        CancellationProtectionEntity foundCancellationEntity = cancellationProtectionRepository.findById(id);
-        if(foundCancellationEntity == null)
-            return false;
-        else {
-            cancellationProtectionRepository.deleteById(id);
-            return true;
-        }
+    @Override
+    public List<CancellationProtectionDto> findAllProtections(){
+        return cancellationProtectionMapper.mapp(cancellationProtectionRepository.findAll());
+    }
+
+    @Override
+    public void deleteProtectionById(Long id) {
+        cancellationProtectionRepository.findById(id);
     }
 }

@@ -4,19 +4,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
-//String protection -> boolean
 @Entity
 @Table(name = "cancellationprotection")
 public class CancellationProtectionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
     private String protection;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private RouteEntity route;
 
-    public CancellationProtectionEntity(String protection) {
+    public CancellationProtectionEntity(long id, String protection) {
+        this.id = id;
         this.protection = protection;
     }
 
@@ -24,11 +24,11 @@ public class CancellationProtectionEntity {
 
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

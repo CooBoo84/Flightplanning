@@ -3,11 +3,11 @@ package se.iths.flightplanning.dto;
 
 public class CancellationProtectionDto {
 
-    private Long id;
+    private long id;
     private String protection;
 
 
-    public CancellationProtectionDto(Long id, String protection) {
+    public CancellationProtectionDto(long id, String protection) {
         this.id = id;
         this.protection = protection;
     }
@@ -15,11 +15,11 @@ public class CancellationProtectionDto {
     public CancellationProtectionDto() {
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -3,29 +3,35 @@ package se.iths.flightplanning.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import se.iths.flightplanning.entity.CancellationProtectionEntity;
-import se.iths.flightplanning.service.CancellationProtectionService;
+import se.iths.flightplanning.dto.CancellationProtectionDto;
+import se.iths.flightplanning.service.CancellationProtectionServiceDto;
 
 @RestController
-@RequestMapping("cancel")
+@RequestMapping("cancellationprotections")
 public class CancellationProtectionController {
 
-    private final CancellationProtectionService cancellationProtectionService;
+    private final CancellationProtectionServiceDto cancellationProtectionServiceDto;
 
-    public CancellationProtectionController(CancellationProtectionService cancellationProtectionService){
-        this.cancellationProtectionService = cancellationProtectionService;
+    public CancellationProtectionController(CancellationProtectionServiceDto cancellationProtectionServiceDto){
+        this.cancellationProtectionServiceDto = cancellationProtectionServiceDto;
     }
 
-    @PostMapping
-    public ResponseEntity<CancellationProtectionEntity> createCancellationProtection(@RequestBody CancellationProtectionEntity cancellationProtectionEntity){
-        CancellationProtectionEntity createProtection = cancellationProtectionService.createProtection(cancellationProtectionEntity);
+    @PostMapping()
+    public ResponseEntity<CancellationProtectionDto> createCancellationProtection(@RequestBody CancellationProtectionDto cancellationProtectionDto){
+        CancellationProtectionDto createProtection = cancellationProtectionServiceDto.createProtection(cancellationProtectionDto);
 
         return new ResponseEntity<>(createProtection ,HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public  ResponseEntity<Iterable<CancellationProtectionEntity>> findAllProtections(){
-        Iterable<CancellationProtectionEntity> allProtection = cancellationProtectionService.findAllProtection();
+    @GetMapping()
+    public  ResponseEntity<Iterable<CancellationProtectionDto>> findAllProtections(){
+        Iterable<CancellationProtectionDto> allProtection = cancellationProtectionServiceDto.findAllProtections();
         return new ResponseEntity<>(allProtection, HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteProtectionById(@PathVariable Long id) {
+        cancellationProtectionServiceDto.deleteProtectionById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
