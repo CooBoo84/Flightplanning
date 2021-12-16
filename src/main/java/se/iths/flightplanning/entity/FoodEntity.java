@@ -10,7 +10,7 @@ public class FoodEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
     private String food;
 
@@ -18,18 +18,18 @@ public class FoodEntity {
     private RouteEntity foodRoute;
 
 
-    public FoodEntity(String food) {
+    public FoodEntity(long id, String food) {
         this.food = food;
     }
 
     public FoodEntity() {
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
