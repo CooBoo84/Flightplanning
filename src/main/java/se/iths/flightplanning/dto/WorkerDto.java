@@ -2,11 +2,11 @@ package se.iths.flightplanning.dto;
 
 public class WorkerDto {
 
-    private Long id;
+    private long id;
     private int pilot;
     private int flightAttendant;
 
-    public WorkerDto(Long id, int pilot, int flightAttendant) {
+    public WorkerDto(long id, int pilot, int flightAttendant) {
         this.id = id;
         this.pilot = pilot;
         this.flightAttendant = flightAttendant;
@@ -15,11 +15,11 @@ public class WorkerDto {
     public WorkerDto() {
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -7,7 +7,7 @@ import se.iths.flightplanning.dto.WorkerDto;
 import se.iths.flightplanning.service.WorkerServiceDto;
 
 @RestController
-@RequestMapping("staff")
+@RequestMapping("workers")
 public class WorkerController {
 
     private final WorkerServiceDto workerServiceDto;
@@ -23,14 +23,14 @@ public class WorkerController {
     }
 
     @GetMapping()
-    public ResponseEntity<Iterable<WorkerDto>> findAllStaff() {
+    public ResponseEntity<Iterable<WorkerDto>> findAllWorkers() {
         Iterable<WorkerDto> allStaff = workerServiceDto.findAllWorkers();
         return new ResponseEntity<>(allStaff, HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteWorkerById(@PathVariable Long id) {
-        workerServiceDto.deleteWorkerById(id);
+        workerServiceDto.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

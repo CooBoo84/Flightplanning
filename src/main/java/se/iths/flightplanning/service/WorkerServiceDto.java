@@ -10,5 +10,5 @@ public interface WorkerServiceDto {
 
     List<WorkerDto> findAllWorkers();
 
-    void deleteWorkerById(Long id);
+    void deleteById(Long id);
 }

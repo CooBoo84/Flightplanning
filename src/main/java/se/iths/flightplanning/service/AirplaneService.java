@@ -29,7 +29,6 @@ public class AirplaneService implements AirplaneServiceDto {
 
     @Override
     public List<AirplaneDto> findAllPlanes() {
-
         return airplaneMapper.mapp(airplaneRepository.findAll());
     }
 

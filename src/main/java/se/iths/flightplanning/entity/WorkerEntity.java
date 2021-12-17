@@ -1,13 +1,8 @@
 package se.iths.flightplanning.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-
-// Should we rename WorkerEntity to Crew and
-// pilot -> numberOfPilots,
-// flightAttendant -> numberOfFlightAttendants
 
 @Entity
 @Table(name = "worker")
@@ -15,26 +10,27 @@ public class WorkerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
     private int pilot;
     private int flightAttendant;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private AirplaneEntity airplane;
 
-    public WorkerEntity(int pilot, int flightAttendant) {
+    public WorkerEntity(long id, int pilot, int flightAttendant) {
+        this.id = id;
         this.pilot = pilot;
         this.flightAttendant = flightAttendant;
     }
 
-    public WorkerEntity(Long id, int pilot, int flightAttendant) {
+    public WorkerEntity() {
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

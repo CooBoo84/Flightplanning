@@ -29,7 +29,7 @@ public class WorkerService implements WorkerServiceDto{
     }
 
     @Override
-    public void deleteWorkerById(Long id) {
+    public void deleteById(Long id) {
         workerRepository.deleteById(id);
     }
 }
