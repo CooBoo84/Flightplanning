@@ -40,8 +40,8 @@ public class AirplaneController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteAnAirplaneById(@PathVariable Long id) {
-        airplaneServiceDto.deleteAirplaneById(id);
+    public ResponseEntity<Void> deleteAirplaneById(@PathVariable Long id) {
+        airplaneServiceDto.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

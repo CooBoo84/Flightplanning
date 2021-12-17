@@ -39,7 +39,7 @@ public class AirplaneService implements AirplaneServiceDto {
     }
 
     @Override
-    public void deleteAirplaneById(Long id) {
+    public void deleteById(Long id) {
         airplaneRepository.deleteById(id);
     }
 }

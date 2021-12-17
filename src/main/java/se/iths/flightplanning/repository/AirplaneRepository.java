@@ -7,6 +7,7 @@ import se.iths.flightplanning.dto.AirplaneDto;
 import se.iths.flightplanning.entity.AirplaneEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface AirplaneRepository extends JpaRepository<AirplaneEntity, Long> {

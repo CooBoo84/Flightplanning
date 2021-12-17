@@ -10,6 +10,6 @@ public interface CancellationProtectionServiceDto {
 
     CancellationProtectionDto createProtection(CancellationProtectionDto cancellationProtectionDto);
 
-    void deleteProtectionById(Long id);
+    void deleteById(Long id);
 
 }

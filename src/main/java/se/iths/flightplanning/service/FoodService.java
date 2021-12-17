@@ -28,7 +28,7 @@ public class FoodService implements FoodServiceDto {
 
     @Override
     public void deleteFoodById(Long id) {
-
+        foodRepository.deleteById(id);
     }
 
     @Override

@@ -31,7 +31,7 @@ public class CancellationProtectionController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteProtectionById(@PathVariable Long id) {
-        cancellationProtectionServiceDto.deleteProtectionById(id);
+        cancellationProtectionServiceDto.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

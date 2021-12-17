@@ -20,7 +20,6 @@ public class RouteService implements RouteServiceDto {
         this.routeMapper = routeMapper;
     }
 
-
     @Override
     public List<RouteDto> findAllRoutes() {
         return routeMapper.mapp(routeRepository.findAll());
@@ -44,11 +43,4 @@ public class RouteService implements RouteServiceDto {
         routeRepository.deleteById(id);
 
     }
-
-    public RouteEntity createRoute(RouteEntity routeEntity){
-        return routeRepository.save(routeEntity);
-    }
-
-
-
 }

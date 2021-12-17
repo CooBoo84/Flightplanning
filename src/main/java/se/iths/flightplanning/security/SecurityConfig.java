@@ -3,7 +3,6 @@ package se.iths.flightplanning.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -28,12 +27,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return provider;
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) {
-//        auth.authenticationProvider(authenticationProvider());
-//    }
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -41,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .httpBasic()
 //                .and()
                 .authorizeRequests()
-                .antMatchers("/","home","/users/signup", "/airplanes", "/cancellationprotections", "/food", "/routes").permitAll()
+                .antMatchers("/","home","/users/signup","/airplanes", "/airplanes/{id}", "/cancellationprotections", "/cancellationprotections/{id}", "/food", "/routes").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -52,5 +45,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .clearAuthentication(true)
                 .permitAll();
     }
-
 }

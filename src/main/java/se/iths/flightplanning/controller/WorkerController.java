@@ -24,7 +24,7 @@ public class WorkerController {
 
     @GetMapping()
     public ResponseEntity<Iterable<WorkerDto>> findAllStaff() {
-        Iterable<WorkerDto> allStaff = workerServiceDto.findAllStaff();
+        Iterable<WorkerDto> allStaff = workerServiceDto.findAllWorkers();
         return new ResponseEntity<>(allStaff, HttpStatus.OK);
     }
 

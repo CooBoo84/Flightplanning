@@ -30,7 +30,7 @@ public class CancellationProtectionService implements CancellationProtectionServ
     }
 
     @Override
-    public void deleteProtectionById(Long id) {
-        cancellationProtectionRepository.findById(id);
+    public void deleteById(Long id) {
+        cancellationProtectionRepository.deleteById(id);
     }
 }

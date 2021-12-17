@@ -2,7 +2,6 @@ package se.iths.flightplanning.service;
 
 import se.iths.flightplanning.dto.RouteDto;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 

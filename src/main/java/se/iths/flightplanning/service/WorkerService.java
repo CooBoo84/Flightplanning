@@ -24,8 +24,7 @@ public class WorkerService implements WorkerServiceDto{
     }
 
     @Override
-    public List<WorkerDto> findAllStaff() {
-
+    public List<WorkerDto> findAllWorkers() {
         return workerMapper.mapp(workerRepository.findAll());
     }
 
@@ -33,6 +32,4 @@ public class WorkerService implements WorkerServiceDto{
     public void deleteWorkerById(Long id) {
         workerRepository.deleteById(id);
     }
-
-
 }
