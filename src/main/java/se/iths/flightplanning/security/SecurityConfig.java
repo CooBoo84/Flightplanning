@@ -1,48 +1,74 @@
 package se.iths.flightplanning.security;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
+import org.springframework.security.oauth2.core.OAuth2TokenValidator;
+import org.springframework.security.oauth2.jwt.*;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-@Configuration
+import java.util.List;
+
 @EnableWebSecurity
+@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Value("${auth0.audience}")
+    private String audience;
 
-    private final FlightPlannerUserDetailsService userDetailsService;
-
-    public SecurityConfig(FlightPlannerUserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
-
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(new BCryptPasswordEncoder());
-
-        return provider;
-    }
+    @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
+    private String issuer;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-//                .httpBasic()
-//                .and()
-                .authorizeRequests()
-                .antMatchers("/","home","/users/signup","/airplanes", "/airplanes/{id}", "/cancellationprotections", "/cancellationprotections/{id}", "/food","/food/{id}", "/routes", "/workers", "/workers/{id}").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login").permitAll()
-                .and()
-                .logout()
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .permitAll();
+            http.authorizeRequests()
+                    .mvcMatchers(HttpMethod.GET, "/**").permitAll() // GET requests don't need auth
+                    .anyRequest()
+                    .authenticated()
+                    .and().oauth2Login()
+                    .and()
+                    .cors()
+                    .configurationSource(corsConfigurationSource())
+                    .and()
+                    .oauth2ResourceServer()
+                    .jwt()
+                    .decoder(jwtDecoder());
+    }
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.authorizeRequests()
+//                .mvcMatchers("/").permitAll()
+//                .anyRequest().authenticated()
+//                .and().oauth2Login();
+//    }
+
+
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedMethods(List.of(
+                HttpMethod.GET.name(),
+                HttpMethod.PUT.name(),
+                HttpMethod.POST.name(),
+                HttpMethod.DELETE.name()
+        ));
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration.applyPermitDefaultValues());
+        return source;
+    }
+
+    JwtDecoder jwtDecoder() {
+        OAuth2TokenValidator<Jwt> withAudience = new AudienceValidator(audience);
+        OAuth2TokenValidator<Jwt> withIssuer = JwtValidators.createDefaultWithIssuer(issuer);
+        OAuth2TokenValidator<Jwt> validator = new DelegatingOAuth2TokenValidator<>(withAudience, withIssuer);
+
+        NimbusJwtDecoder jwtDecoder = JwtDecoders.fromOidcIssuerLocation(issuer);
+        jwtDecoder.setJwtValidator(validator);
+        return jwtDecoder;
     }
 }
