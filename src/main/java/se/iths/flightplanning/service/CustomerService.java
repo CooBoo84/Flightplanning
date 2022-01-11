@@ -1,13 +1,11 @@
 package se.iths.flightplanning.service;
 
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import se.iths.flightplanning.dto.CustomerDto;
 import se.iths.flightplanning.entity.RoleEntity;
-import se.iths.flightplanning.entity.CustomerEntity;
 import se.iths.flightplanning.mappers.CustomerMapper;
-import se.iths.flightplanning.repository.RoleRepository;
 import se.iths.flightplanning.repository.CustomerRepository;
+import se.iths.flightplanning.repository.RoleRepository;
 
 import java.util.List;
 
@@ -17,7 +15,6 @@ public class CustomerService implements CustomerServiceDto{
     private final CustomerRepository customerRepository;
     private final RoleRepository roleRepository;
     private final CustomerMapper customerMapper;
-//    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public CustomerService(CustomerRepository customerRepository, RoleRepository roleRepository, CustomerMapper customerMapper) {
         this.customerRepository = customerRepository;
@@ -35,18 +32,5 @@ public class CustomerService implements CustomerServiceDto{
         return customerMapper.mapp(customerRepository.findAll());
     }
 }
-
-
-
-   /* public CustomerEntity createUser(CustomerEntity customerEntity) {
-//        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-        RoleEntity roleToAdd = roleRepository.findByRole("ROLE_ADMIN");
-       // customerEntity.addRole(roleToAdd);
-        return customerRepository.save(customerEntity);
-    }
-    public Iterable<CustomerEntity> findAllUsers() {
-        return customerRepository.findAll();
-    }
-*/
 
 

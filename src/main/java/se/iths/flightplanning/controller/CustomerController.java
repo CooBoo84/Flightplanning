@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import se.iths.flightplanning.dto.CustomerDto;
 import se.iths.flightplanning.service.CustomerServiceDto;
 
-
 @RestController
 @RequestMapping("customers")
 public class CustomerController {

@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()
-                    .mvcMatchers(HttpMethod.GET, "/**").permitAll() // GET requests don't need auth
+                    .mvcMatchers(HttpMethod.GET, "/callback", "/login", "/", "/airplanes", "/users", "/customers", "/workers", "/routes", "/staff", "/food", "/cancellationprotections").permitAll() // GET requests don't need auth
                     .anyRequest()
                     .authenticated()
                     .and().oauth2Login()
@@ -39,14 +39,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .jwt()
                     .decoder(jwtDecoder());
     }
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .mvcMatchers("/").permitAll()
-//                .anyRequest().authenticated()
-//                .and().oauth2Login();
-//    }
-
 
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();

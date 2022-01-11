@@ -1,16 +1,17 @@
 package se.iths.flightplanning;
 
+
+import kong.unirest.HttpResponse;
+import kong.unirest.Unirest;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import org.springframework.context.annotation.Bean;
-
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.jms.core.JmsTemplate;
-
-import se.iths.flightplanning.entity.*;
-import se.iths.flightplanning.repository.*;
+import se.iths.flightplanning.entity.CustomerEntity;
+import se.iths.flightplanning.entity.RoleEntity;
+import se.iths.flightplanning.repository.RoleRepository;
 
 @SpringBootApplication
 public class FlightplanningApplication  {
@@ -23,6 +24,13 @@ public class FlightplanningApplication  {
         CustomerEntity customer = new CustomerEntity("Sven", "Gurka", "sven@gurka.se", "0315756856", "username", "password");
 
         jmsTemplate.convertAndSend("user", customer);
+
+//        HttpResponse<String> response = Unirest.post("https://dev-s794ofn4.us.auth0.com/oauth/token")
+//                .header("content-type", "application/json")
+//                .body("{\"client_id\":\"a2SvDbl48ZRS17a34xH8kRnEUn178ZFj\",\"client_secret\":\"0LhP2J_ueS20mJFdeVOJfZI3uWANtdKVw8aCl4Jhouc33YyRcM9Zglv6KtGEztxj\",\"audience\":\"https://FlightApp/\",\"grant_type\":\"client_credentials\"}")
+//                .asString();
+//
+//        System.out.println("----------------- response ------------------- " + response.getHeaders());
     }
 
 //    AirplaneRepository airplaneRepository;
