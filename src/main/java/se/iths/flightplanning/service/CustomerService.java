@@ -22,7 +22,7 @@ public class CustomerService {
 
     public CustomerEntity createUser(CustomerEntity customerEntity) {
 //        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-        RoleEntity roleToAdd = roleRepository.findByRole("ROLE_ADMIN");
+//        RoleEntity roleToAdd = roleRepository.findByRole("ROLE_ADMIN");
        // customerEntity.addRole(roleToAdd);
         return customerRepository.save(customerEntity);
     }

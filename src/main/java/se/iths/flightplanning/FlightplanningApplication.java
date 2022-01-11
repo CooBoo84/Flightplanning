@@ -4,21 +4,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import org.springframework.boot.autoconfigure.web.ConditionalOnEnabledResourceChain;
-import org.springframework.context.annotation.Bean;
-
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jms.core.JmsTemplate;
 
-import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import se.iths.flightplanning.entity.*;
 import se.iths.flightplanning.repository.*;
 
 @SpringBootApplication
-@EnableAuthorizationServer
-@EnableResourceServer
 public class FlightplanningApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
@@ -26,7 +18,7 @@ public class FlightplanningApplication implements CommandLineRunner {
 
         JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
 
-        CustomerEntity customer = new CustomerEntity("Sven", "Gurka", "sven@gurka.se", "0315756856", "username", "password");
+        CustomerEntity customer = new CustomerEntity("username", "sven@gurka.se", "password");
 
         jmsTemplate.convertAndSend("user", customer);
     }
@@ -50,7 +42,7 @@ public class FlightplanningApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        CustomerEntity customer = new CustomerEntity("Hans", "Sandblom", "sdgdfsg@dhdh.se", "089674545", "username", "password");
+        CustomerEntity customer = new CustomerEntity("username", "sven@gurka.se", "password");
         RouteEntity rutt1 = new RouteEntity("Gbg-Sthlm");
         AirplaneEntity air1 = new AirplaneEntity("Model-101", 100, 10);
         WorkerEntity worker = new WorkerEntity(2, 8);
@@ -68,15 +60,4 @@ public class FlightplanningApplication implements CommandLineRunner {
 
         customerRepository.save(customer);
     }
-
-    @Bean
-    public CommandLineRunner setUpRole(RoleRepository roleRepository) {
-        return (args) -> {
-            roleRepository.save(new RoleEntity("ROLE_ADMIN"));
-            roleRepository.save(new RoleEntity("ROLE_USER"));
-            roleRepository.save(new RoleEntity("ROLE_VIP"));
-        };
-
-    }
-
 }

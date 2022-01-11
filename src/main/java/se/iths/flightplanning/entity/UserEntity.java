@@ -26,10 +26,10 @@ public class UserEntity {
 
 
 
-    public void addRole(RoleEntity role) {
-        roles.add(role);
-        role.getUsers().add(this);
-    }
+//    public void addRole(RoleEntity role) {
+//        roles.add(role);
+//        role.getUsers().add(this);
+//    }
 
 
     public Long getId() {

@@ -12,14 +12,10 @@ public class RoleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String role;
-    @ManyToMany(mappedBy = "roles")
-    private Set<UserEntity> users;
-    //private Set<CustomerEntity> users;
 
-    public RoleEntity(String role) {
-        this.role = role;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private ERole name;
 
     public RoleEntity() {
 
@@ -33,29 +29,11 @@ public class RoleEntity {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public ERole getName() {
+        return name;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setName(ERole name) {
+        this.name = name;
     }
-
-    @JsonIgnore
-    public Set<UserEntity> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<UserEntity> users) {
-        this.users = users;
-    }
-
-//    @JsonIgnore
-//    public Set<CustomerEntity> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(Set<CustomerEntity> users) {
-//        this.users = users;
-//    }
 }
