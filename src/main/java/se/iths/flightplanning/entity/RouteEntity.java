@@ -25,9 +25,6 @@ public class RouteEntity {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private FoodEntity foods;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private CancellationProtectionEntity cancel;
-
 
     public RouteEntity(String routeName) {
         this.routeName = routeName;
@@ -43,14 +40,6 @@ public class RouteEntity {
 
     public void setAirplaneNames(Set<AirplaneEntity> airplaneNames) {
         this.airplaneNames = airplaneNames;
-    }
-
-    public CancellationProtectionEntity getCancel() {
-        return cancel;
-    }
-
-    public void setCancel(CancellationProtectionEntity cancel) {
-        this.cancel = cancel;
     }
 
     public Long getId() {
