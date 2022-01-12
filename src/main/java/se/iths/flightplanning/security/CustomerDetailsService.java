@@ -1,13 +1,15 @@
 package se.iths.flightplanning.security;
 
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import se.iths.flightplanning.dto.CustomerDto;
 import se.iths.flightplanning.entity.CustomerEntity;
 import se.iths.flightplanning.repository.CustomerRepository;
 
 @Service
-class CustomerDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
+class CustomerDetailsService implements UserDetailsService {
 
     private final CustomerRepository customerRepository;
 
@@ -18,7 +20,7 @@ class CustomerDetailsService implements org.springframework.security.core.userde
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        CustomerEntity userEntity = customerRepository.findByUsername(username);
+        CustomerDto userEntity = customerRepository.findByUsername(username);
         if (userEntity == null) {
             throw new UsernameNotFoundException("Can't find user with username: " + "username");
         }
