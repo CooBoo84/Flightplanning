@@ -17,14 +17,12 @@ public class WorkerMapper {
 
     public WorkerDto mapp(WorkerEntity workerEntity) {
         return new WorkerDto(
-                workerEntity.getId(),
                 workerEntity.getPilot(),
                 workerEntity.getFlightAttendant());
     }
 
     public WorkerEntity mapp(WorkerDto workerDto) {
         return new WorkerEntity(
-                workerDto.getId(),
                 workerDto.getPilot(),
                 workerDto.getFlightAttendant());
     }

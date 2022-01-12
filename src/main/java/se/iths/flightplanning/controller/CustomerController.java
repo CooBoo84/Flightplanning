@@ -16,16 +16,22 @@ public class CustomerController {
         this.customerServiceDto = customerServiceDto;
     }
 
-    @PostMapping()
+    @PostMapping("signup")
     public ResponseEntity<CustomerDto> createCustomer(@RequestBody CustomerDto customerDto) {
         CustomerDto createdCustomer = customerServiceDto.createCustomer(customerDto);
         return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
     }
 
     @GetMapping()
-    public ResponseEntity<Iterable<CustomerDto>> findAllUsers() {
+    public ResponseEntity<Iterable<CustomerDto>> findAllCustomers() {
         Iterable<CustomerDto> allUsers = customerServiceDto.findAllCustomers();
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
+        customerServiceDto.deleteCustomer(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

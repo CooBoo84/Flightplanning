@@ -15,8 +15,7 @@ public class CancellationProtectionEntity {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private RouteEntity route;
 
-    public CancellationProtectionEntity(long id, String protection) {
-        this.id = id;
+    public CancellationProtectionEntity(String protection) {
         this.protection = protection;
     }
 

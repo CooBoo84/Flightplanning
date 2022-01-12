@@ -25,8 +25,7 @@ public class AirplaneEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<WorkerEntity> staff = new HashSet<>();
 
-    public AirplaneEntity(long id, String airplaneName, int numberOfSeat, int numberOfStaff) {
-        this.id = id;
+    public AirplaneEntity(String airplaneName, int numberOfSeat, int numberOfStaff) {
         this.airplaneName = airplaneName;
         this.numberOfSeat = numberOfSeat;
         this.numberOfStaff = numberOfStaff;

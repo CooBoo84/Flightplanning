@@ -9,4 +9,6 @@ public interface CustomerServiceDto {
     CustomerDto createCustomer(CustomerDto customerDto);
 
     List<CustomerDto> findAllCustomers();
+
+    void deleteCustomer(Long id);
 }

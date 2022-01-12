@@ -14,11 +14,11 @@ public class FoodMapper {
     }
 
     public FoodDto mapp(FoodEntity foodEntity) {
-        return new FoodDto(foodEntity.getId(), foodEntity.getFood());
+        return new FoodDto(foodEntity.getFood());
     }
 
     public FoodEntity mapp(FoodDto foodDto) {
-        return new FoodEntity(foodDto.getId(), foodDto.getFood());
+        return new FoodEntity(foodDto.getFood());
     }
 
     public Optional<FoodDto> mapp(Optional<FoodEntity> optionalFoodEntity) {

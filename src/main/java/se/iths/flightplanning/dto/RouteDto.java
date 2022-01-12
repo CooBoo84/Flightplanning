@@ -7,8 +7,7 @@ public class RouteDto {
     private String routeName;
 
 
-    public RouteDto(Long id, String routeName) {
-        this.id = id;
+    public RouteDto(String routeName) {
         this.routeName = routeName;
     }
 

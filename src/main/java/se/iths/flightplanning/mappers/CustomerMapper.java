@@ -14,8 +14,7 @@ public class CustomerMapper {
     }
 
     public CustomerDto mapp(CustomerEntity customerEntity) {
-        return new CustomerDto(customerEntity.getId(),
-                customerEntity.getFirstName(),
+        return new CustomerDto(customerEntity.getFirstName(),
                 customerEntity.getLastName(),
                 customerEntity.getEmail(),
                 customerEntity.getTelephone(),

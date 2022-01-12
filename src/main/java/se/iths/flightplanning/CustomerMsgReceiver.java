@@ -3,7 +3,6 @@ package se.iths.flightplanning;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 import se.iths.flightplanning.entity.CustomerEntity;
-import se.iths.flightplanning.entity.UserEntity;
 
 
 @Component

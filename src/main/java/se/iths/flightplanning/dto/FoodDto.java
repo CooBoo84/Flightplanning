@@ -6,8 +6,7 @@ public class FoodDto {
     private long id;
     private String food;
 
-    public FoodDto(long id, String food) {
-        this.id = id;
+    public FoodDto(String food) {
         this.food = food;
     }
 

@@ -6,8 +6,7 @@ public class RoleDto {
     private String role;
 
 
-    public RoleDto(Long id, String role) {
-        this.id = id;
+    public RoleDto(String role) {
         this.role = role;
     }
 

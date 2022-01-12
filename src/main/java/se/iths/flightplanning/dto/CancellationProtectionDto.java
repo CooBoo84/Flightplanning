@@ -7,8 +7,7 @@ public class CancellationProtectionDto {
     private String protection;
 
 
-    public CancellationProtectionDto(long id, String protection) {
-        this.id = id;
+    public CancellationProtectionDto(String protection) {
         this.protection = protection;
     }
 

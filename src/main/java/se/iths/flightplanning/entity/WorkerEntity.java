@@ -17,8 +17,7 @@ public class WorkerEntity {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private AirplaneEntity airplane;
 
-    public WorkerEntity(long id, int pilot, int flightAttendant) {
-        this.id = id;
+    public WorkerEntity(int pilot, int flightAttendant) {
         this.pilot = pilot;
         this.flightAttendant = flightAttendant;
     }

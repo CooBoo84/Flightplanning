@@ -31,10 +31,10 @@ public class CustomerEntity {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<RoleEntity> roles = new HashSet<>();
 
-//    public void addRole(RoleEntity role) {
-//        roles.add(role);
-//        role.getUsers().add(this);
-//    }
+    public void addRole(RoleEntity role) {
+        roles.add(role);
+        role.getUsers().add(this);
+    }
 
     public CustomerEntity(String firstName, String lastName, String email, String telephone, String username, String password) {
         this.firstName = firstName;
@@ -104,13 +104,13 @@ public class CustomerEntity {
         this.password = password;
     }
 
-//    public Set<RoleEntity> getRoles() {
-//        return roles;
-//    }
-//
-//    public void setRoles(Set<RoleEntity> roles) {
-//        this.roles = roles;
-//    }
+    public Set<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleEntity> roles) {
+        this.roles = roles;
+    }
 
     public Set<RouteEntity> getRouteNames() {
         return routeNames;

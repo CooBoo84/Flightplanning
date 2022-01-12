@@ -15,11 +15,11 @@ public class CancellationProtectionMapper {
     }
 
     public CancellationProtectionDto mapp(CancellationProtectionEntity cancellationProtectionEntity) {
-        return new CancellationProtectionDto(cancellationProtectionEntity.getId(), cancellationProtectionEntity.getProtection());
+        return new CancellationProtectionDto(cancellationProtectionEntity.getProtection());
     }
 
     public CancellationProtectionEntity mapp(CancellationProtectionDto cancellationProtectionDto) {
-        return new CancellationProtectionEntity(cancellationProtectionDto.getId(), cancellationProtectionDto.getProtection());
+        return new CancellationProtectionEntity(cancellationProtectionDto.getProtection());
     }
 
     public Optional<CancellationProtectionDto> mapp(Optional<CancellationProtectionEntity> optionalCancellationProtectionEntity) {

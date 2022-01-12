@@ -15,11 +15,11 @@ public class RouteMapper {
     }
 
     public RouteDto mapp(RouteEntity routeEntity) {
-        return new RouteDto(routeEntity.getId(), routeEntity.getRouteName());
+        return new RouteDto(routeEntity.getRouteName());
     }
 
     public RouteEntity mapp(RouteDto routeDto) {
-        return new RouteEntity(routeDto.getId(), routeDto.getRouteName());
+        return new RouteEntity(routeDto.getRouteName());
     }
 
     public Optional<RouteDto> mapp(Optional<RouteEntity> optionalRouteEntity) {

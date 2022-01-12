@@ -7,5 +7,5 @@ import se.iths.flightplanning.entity.CustomerEntity;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> {
-    CustomerEntity findByEmail (String email);
+    CustomerEntity findByUsername (String username);
 }

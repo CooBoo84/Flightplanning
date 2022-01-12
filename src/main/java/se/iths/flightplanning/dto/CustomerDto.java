@@ -11,8 +11,7 @@ public class CustomerDto {
     private String username;
     private String password;
 
-    public CustomerDto(Long id, String firstName, String lastName, String email, String telephone, String username, String password) {
-        this.id = id;
+    public CustomerDto(String firstName, String lastName, String email, String telephone, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

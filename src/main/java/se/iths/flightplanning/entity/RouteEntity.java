@@ -29,8 +29,7 @@ public class RouteEntity {
     private CancellationProtectionEntity cancel;
 
 
-    public RouteEntity(Long id,String routeName) {
-        this.id = id;
+    public RouteEntity(String routeName) {
         this.routeName = routeName;
     }
 
