@@ -17,20 +17,13 @@ public class UserEntity {
     private String password;
     private String email;
 
-
-
-
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<RoleEntity> roles = new HashSet<>();
-
-
-
 
     public void addRole(RoleEntity role) {
         roles.add(role);
         role.getUsers().add(this);
     }
-
 
     public Long getId() {
         return id;
@@ -39,7 +32,6 @@ public class UserEntity {
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public String getUsername() {
         return username;

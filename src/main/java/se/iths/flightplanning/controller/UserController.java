@@ -46,29 +46,11 @@ public class UserController {
             throw new EmptyListException("Users list is empty.");
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<UserEntity> findUserById(@PathVariable Long id) {
-        UserEntity foundUser = userService.findUserById(id);
-        if (foundUser == null) {
-            throw new ResourceNotFoundException("User with id :" + id + " could not be found.");
-        }
-        return new ResponseEntity<>(foundUser, HttpStatus.OK);
-    }
-
     @GetMapping("/username")
     public ResponseEntity<UserEntity> findUserByUsername(@RequestParam String username) {
         UserEntity foundUser = userService.findUserByUsername(username);
         if (foundUser == null) {
             throw new ResourceNotFoundException("User with username :" + username + " could not be found.");
-        }
-        return new ResponseEntity<>(foundUser, HttpStatus.OK);
-    }
-
-    @GetMapping("/email")
-    public ResponseEntity<UserEntity> findUserByEmail(@RequestParam String email) {
-        UserEntity foundUser = userService.findUserByEmail(email);
-        if (foundUser == null) {
-            throw new ResourceNotFoundException("User with email-adress :" + email + " could not be found.");
         }
         return new ResponseEntity<>(foundUser, HttpStatus.OK);
     }

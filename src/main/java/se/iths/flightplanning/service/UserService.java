@@ -40,20 +40,13 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public UserEntity findUserById(Long id) {
-        return userRepository.findUserEntityById(id);
-    }
-
     public UserEntity findUserByUsername(String username) {
-        return  userRepository.findUserEntityByUsername(username);
+        return  userRepository.findByUsername(username);
     }
 
-    public UserEntity findUserByEmail(String email) {
-        return  userRepository.findUserEntityByEmail(email);
-    }
 
     public void deleteUserByUsername(String username) {
-        UserEntity foundUser = userRepository.findUserEntityByUsername(username);
+        UserEntity foundUser = userRepository.findByUsername(username);
         userRepository.deleteById(foundUser.getId());
     }
 }
