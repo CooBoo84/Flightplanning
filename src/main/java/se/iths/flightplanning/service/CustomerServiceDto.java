@@ -1,14 +1,14 @@
 package se.iths.flightplanning.service;
 
-import se.iths.flightplanning.dto.CustomerDto;
+import se.iths.flightplanning.entity.CustomerEntity;
 
 import java.util.List;
 
 public interface CustomerServiceDto {
 
-    CustomerDto createCustomer(CustomerDto customerDto);
+    CustomerEntity createCustomer(CustomerEntity customerDto);
 
-    List<CustomerDto> findAllCustomers();
+    List<CustomerEntity> findAllCustomers();
 
     void deleteCustomer(Long id);
 }

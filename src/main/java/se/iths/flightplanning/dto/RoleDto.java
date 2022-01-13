@@ -1,7 +1,5 @@
 package se.iths.flightplanning.dto;
 
-import se.iths.flightplanning.entity.CustomerEntity;
-
 import javax.persistence.ManyToMany;
 import java.util.Set;
 

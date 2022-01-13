@@ -19,13 +19,6 @@ public class CustomerDto {
     private String username;
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<RoleDto> roles = new HashSet<>();
-
-    public void addRole(RoleDto role) {
-        roles.add(role);
-        role.getUsers().add(this);
-    }
 
     public CustomerDto(String firstName, String lastName, String email, String telephone, String username, String password) {
         this.firstName = firstName;
@@ -95,11 +88,4 @@ public class CustomerDto {
         this.password = password;
     }
 
-    public Set<RoleDto> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<RoleDto> roles) {
-        this.roles = roles;
-    }
 }

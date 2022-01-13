@@ -1,44 +1,45 @@
 package se.iths.flightplanning.service;
 
 import org.springframework.stereotype.Service;
-import se.iths.flightplanning.dto.CustomerDto;
-import se.iths.flightplanning.entity.CustomerEntity;
 import se.iths.flightplanning.entity.RoleEntity;
+import se.iths.flightplanning.entity.CustomerEntity;
 import se.iths.flightplanning.mappers.CustomerMapper;
+import se.iths.flightplanning.mappers.RoleMapper;
 import se.iths.flightplanning.repository.CustomerRepository;
 import se.iths.flightplanning.repository.RoleRepository;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.List;
-
 @Service
-public class CustomerService implements CustomerServiceDto{
+public class CustomerService {
 
     private final CustomerRepository customerRepository;
     private final RoleRepository roleRepository;
     private final CustomerMapper customerMapper;
+    private final RoleMapper roleMapper;
 
-    public CustomerService(CustomerRepository customerRepository, RoleRepository roleRepository, CustomerMapper customerMapper) {
+    public CustomerService(CustomerRepository customerRepository, RoleRepository roleRepository, CustomerMapper customerMapper, RoleMapper roleMapper) {
         this.customerRepository = customerRepository;
         this.roleRepository = roleRepository;
         this.customerMapper = customerMapper;
+        this.roleMapper = roleMapper;
     }
 
-    @Override
-    public CustomerDto createCustomer(CustomerDto customerDto) {
+    public CustomerEntity createCustomer(CustomerEntity customerEntity) {
         RoleEntity roleToAdd = roleRepository.findByRole("ROLE_ADMIN");
-        return customerMapper.mapp(customerRepository.save(customerMapper.mapp(customerDto)));
-    }
-    @Override
-    public List<CustomerDto> findAllCustomers () {
-        return customerMapper.mapp(customerRepository.findAll());
+//        RoleDto roleDto = roleMapper.mapp(roleToAdd);
+        customerEntity.addRole(roleToAdd);
+        return customerRepository.save(customerEntity);
+//        return customerMapper.mapp(customerRepository.save(customerMapper.mapp(customerDto)));
     }
 
-    @Override
-    public void deleteCustomer(Long id) {
-        CustomerEntity foundCustomer = customerRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        customerRepository.deleteById(foundCustomer.getId());
-    }
+//    public List<CustomerEntity> findAllCustomers () {
+//        return customerMapper.mapp(customerRepository.findAll());
+//    }
+//
+//
+//    public void deleteCustomer(Long id) {
+//        se.iths.flightplanning.entity.CustomerEntity foundCustomer = customerRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+//        customerRepository.deleteById(foundCustomer.getId());
+//    }
 
 }
 

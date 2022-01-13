@@ -3,8 +3,6 @@ package se.iths.flightplanning.security;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import se.iths.flightplanning.dto.CustomerDto;
-import se.iths.flightplanning.dto.RoleDto;
 import se.iths.flightplanning.entity.CustomerEntity;
 import se.iths.flightplanning.entity.RoleEntity;
 
@@ -14,9 +12,9 @@ import java.util.Set;
 
 public class CustomerPrincipal implements UserDetails {
 
-    private final CustomerDto customerDto;
+    private final CustomerEntity customerDto;
 
-    public CustomerPrincipal(CustomerDto userDto) {
+    public CustomerPrincipal(CustomerEntity userDto) {
         super();
         this.customerDto = userDto;
     }
@@ -24,9 +22,9 @@ public class CustomerPrincipal implements UserDetails {
     //Omvandlar RoleEntity till något som Sprinig Security förstår, dvs SimpleGrantedAuthority
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<RoleDto> roles = customerDto.getRoles();
+        Set<RoleEntity> roles = customerDto.getRoles();
         Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles.size());
-        for (RoleDto role : roles) {
+        for (RoleEntity role : roles) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole().toUpperCase()));
         }
         return grantedAuthorities;

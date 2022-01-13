@@ -1,6 +1,5 @@
 package se.iths.flightplanning.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -14,7 +13,8 @@ public class RoleEntity {
     private Long id;
     private String role;
 
-
+    @ManyToMany(mappedBy = "roles")
+    private Set<CustomerEntity> users;
 
     public RoleEntity(String role) {
         this.role = role;
@@ -40,4 +40,11 @@ public class RoleEntity {
         this.role = role;
     }
 
+    public Set<CustomerEntity> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<CustomerEntity> users) {
+        this.users = users;
+    }
 }
