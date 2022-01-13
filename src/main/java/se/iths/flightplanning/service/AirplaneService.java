@@ -1,43 +1,39 @@
 package se.iths.flightplanning.service;
 
 import org.springframework.stereotype.Service;
-import se.iths.flightplanning.dto.AirplaneDto;
-import se.iths.flightplanning.mappers.AirplaneMapper;
+import se.iths.flightplanning.entity.AirplaneEntity;
 import se.iths.flightplanning.repository.AirplaneRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 
 @Service
-public class AirplaneService implements AirplaneServiceDto {
+public class AirplaneService  {
 
     private final AirplaneRepository airplaneRepository;
-    private final AirplaneMapper airplaneMapper;
 
-    public AirplaneService(AirplaneRepository airplaneRepository, AirplaneMapper airplaneMapper) {
+    public AirplaneService(AirplaneRepository airplaneRepository) {
         this.airplaneRepository = airplaneRepository;
-        this.airplaneMapper = airplaneMapper;
     }
 
-    @Override
-    public AirplaneDto createPlane(AirplaneDto airplaneDto) {
-        if (airplaneDto.getAirplaneName().isEmpty())
+
+    public AirplaneEntity createPlane(AirplaneEntity airplaneEntity) {
+        if (airplaneEntity.getAirplaneName().isEmpty())
             throw new RuntimeException();
-        return airplaneMapper.mapp(airplaneRepository.save(airplaneMapper.mapp(airplaneDto)));
+        return airplaneRepository.save(airplaneEntity);
     }
 
-    @Override
-    public List<AirplaneDto> findAllPlanes() {
-        return airplaneMapper.mapp(airplaneRepository.findAll());
+
+    public Iterable<AirplaneEntity> findAllPlanes() {
+        return airplaneRepository.findAll();
     }
 
-    @Override
-    public Optional<AirplaneDto> getAirplaneById(Long id) {
-        return airplaneMapper.mapp(airplaneRepository.findById(id));
+
+    public Optional<AirplaneEntity> getAirplaneById(Long id) {
+        return airplaneRepository.findById(id);
     }
 
-    @Override
+
     public void deleteById(Long id) {
         airplaneRepository.deleteById(id);
     }

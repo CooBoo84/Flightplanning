@@ -17,7 +17,7 @@ public class RouteEntity {
 
 
     @ManyToMany(mappedBy = "routeNames", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<CustomerEntity> users;
+    private Set<UserEntity> users;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<AirplaneEntity> airplaneNames = new HashSet<>();
@@ -59,11 +59,11 @@ public class RouteEntity {
     }
 
     @JsonIgnore
-    public Set<CustomerEntity> getUsers() {
+    public Set<UserEntity> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<CustomerEntity> users) {
+    public void setUsers(Set<UserEntity> users) {
         this.users = users;
     }
 

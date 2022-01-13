@@ -3,28 +3,28 @@ package se.iths.flightplanning.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import se.iths.flightplanning.dto.RouteDto;
-import se.iths.flightplanning.service.RouteServiceDto;
+import se.iths.flightplanning.entity.RouteEntity;
+import se.iths.flightplanning.service.RouteService;
 
 @RestController
 @RequestMapping("routes")
 public class RouteController {
 
-    private final RouteServiceDto routeServiceDto;
+    private final RouteService routeService;
 
-    public RouteController(RouteServiceDto routeServiceDto) {
-        this.routeServiceDto = routeServiceDto;
+    public RouteController(RouteService routeService) {
+        this.routeService = routeService;
     }
 
     @PostMapping()
-    public ResponseEntity<RouteDto> createRoute(@RequestBody RouteDto routeDto) {
-        RouteDto createdRoute = routeServiceDto.createRoute(routeDto);
+    public ResponseEntity<RouteEntity> createRoute(@RequestBody RouteEntity routeEntity) {
+        RouteEntity createdRoute = routeService.createRoute(routeEntity);
         return new ResponseEntity<>(createdRoute, HttpStatus.CREATED);
     }
 
     @GetMapping()
-    public ResponseEntity<Iterable<RouteDto>> findAllRoutes() {
-        Iterable<RouteDto> allRoutes = routeServiceDto.findAllRoutes();
+    public ResponseEntity<Iterable<RouteEntity>> findAllRoutes() {
+        Iterable<RouteEntity> allRoutes = routeService.findAllRoutes();
         return new ResponseEntity<>(allRoutes, HttpStatus.OK);
     }
 }

@@ -4,26 +4,26 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import se.iths.flightplanning.entity.CustomerEntity;
-import se.iths.flightplanning.repository.CustomerRepository;
+import se.iths.flightplanning.entity.UserEntity;
+import se.iths.flightplanning.repository.UserRepository;
 
 @Service
-class CustomerDetailsService implements UserDetailsService {
+class LoppisUserDetailsService implements UserDetailsService {
 
-    private final CustomerRepository customerRepository;
+    private final UserRepository userRepository;
 
-    public CustomerDetailsService(CustomerRepository userRepository) {
+    public LoppisUserDetailsService(UserRepository userRepository) {
         super();
-        this.customerRepository = userRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        CustomerEntity userEntity = customerRepository.findByUsername(username);
+        UserEntity userEntity = userRepository.findByUsername(username);
         if (userEntity == null) {
             throw new UsernameNotFoundException("Can't find user with username: " + "username");
         }
-        return new CustomerPrincipal(userEntity);
+        return new LoppisUserPrincipal(userEntity);
     }
 
 }

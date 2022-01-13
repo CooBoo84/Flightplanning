@@ -3,7 +3,6 @@ package se.iths.flightplanning.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -13,9 +12,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final CustomerDetailsService userDetailsService;
+    private final LoppisUserDetailsService userDetailsService;
 
-    public SecurityConfig(CustomerDetailsService userDetailsService) {
+    public SecurityConfig(LoppisUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
@@ -27,10 +26,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return provider;
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider());
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.authenticationProvider(authenticationProvider());
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -39,8 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/home", "/customers/signup", "/customers").permitAll()
-                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/","/users","/users/signup", "/food","/food/{id}", "/routes","/routes/{id}", "/workers", "/workers/{id}").permitAll()
+                .antMatchers("/admin","/airplanes", "/airplanes/{id}").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

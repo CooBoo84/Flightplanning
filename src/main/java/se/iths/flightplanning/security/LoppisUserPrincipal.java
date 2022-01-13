@@ -3,26 +3,26 @@ package se.iths.flightplanning.security;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import se.iths.flightplanning.entity.CustomerEntity;
 import se.iths.flightplanning.entity.RoleEntity;
+import se.iths.flightplanning.entity.UserEntity;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
-public class CustomerPrincipal implements UserDetails {
+public class LoppisUserPrincipal implements UserDetails {
 
-    private final CustomerEntity customerDto;
+    private final UserEntity userEntity;
 
-    public CustomerPrincipal(CustomerEntity userDto) {
+    public LoppisUserPrincipal(UserEntity userEntity) {
         super();
-        this.customerDto = userDto;
+        this.userEntity = userEntity;
     }
 
     //Omvandlar RoleEntity till något som Sprinig Security förstår, dvs SimpleGrantedAuthority
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<RoleEntity> roles = customerDto.getRoles();
+        Set<RoleEntity> roles = userEntity.getRoles();
         Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles.size());
         for (RoleEntity role : roles) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole().toUpperCase()));
@@ -32,12 +32,12 @@ public class CustomerPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.customerDto.getPassword();
+        return this.userEntity.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return this.customerDto.getUsername();
+        return this.userEntity.getUsername();
     }
 
     @Override

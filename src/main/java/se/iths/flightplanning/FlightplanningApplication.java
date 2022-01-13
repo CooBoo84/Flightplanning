@@ -3,25 +3,18 @@ package se.iths.flightplanning;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.jms.core.JmsTemplate;
-import se.iths.flightplanning.entity.*;
-import se.iths.flightplanning.repository.*;
+import se.iths.flightplanning.entity.RoleEntity;
+import se.iths.flightplanning.repository.RoleRepository;
 
 @SpringBootApplication
-public class FlightplanningApplication  {
+public class FlightplanningApplication {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(FlightplanningApplication.class, args);
-
-        JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
-
-        CustomerEntity customer = new CustomerEntity("Sven", "Gurka", "sven@gurka.se", "0315756856", "username", "password");
-
-        jmsTemplate.convertAndSend("user", customer);
+        SpringApplication.run(FlightplanningApplication.class, args);
     }
 
+    // Generate data at startup
     @Bean
     public CommandLineRunner setUpRole(RoleRepository roleRepository) {
         return (args) -> {
@@ -29,4 +22,5 @@ public class FlightplanningApplication  {
             roleRepository.save(new RoleEntity("ROLE_USER"));
         };
     }
+
 }
