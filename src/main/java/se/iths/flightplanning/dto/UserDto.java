@@ -1,14 +1,12 @@
-package se.iths.flightplanning.entity;
+package se.iths.flightplanning.dto;
 
-import javax.persistence.*;
+import se.iths.flightplanning.entity.RoleEntity;
+
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-public class UserEntity {
+public class UserDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
@@ -17,30 +15,8 @@ public class UserEntity {
     private String username;
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<RoleEntity> roles = new HashSet<>();
 
-    public void addRole(RoleEntity role) {
-        roles.add(role);
-        role.getUsers().add(this);
-    }
-
-    public void removeRole(RoleEntity role) {
-        roles.remove(role);
-        role.getUsers().remove(this);
-    }
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_routes", joinColumns = { @JoinColumn(name = "user_id") },
-            inverseJoinColumns = { @JoinColumn(name = "route_id") })
-    private Set<RouteEntity> routeNames = new HashSet<>();
-
-    public void addRoute(RouteEntity routeName) {
-        routeNames.add(routeName);
-        routeName.getUsers().add(this);
-    }
-
-    public UserEntity(String firstName, String lastName, String email, String telephone, String username, String password) {
+    public UserDto(String firstName, String lastName, String email, String telephone, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -49,18 +25,36 @@ public class UserEntity {
         this.password = password;
     }
 
-    public UserEntity() {
+    private Set<RoleDto> roles = new HashSet<>();
+
+    public void addRole(RoleDto role) {
+        roles.add(role);
+        role.getUsers().add(this);
     }
-    public Set<RoleEntity> getRoles() {
+
+    public void removeRole(RoleEntity role) {
+        roles.remove(role);
+        role.getUsers().remove(this);
+
+    }
+
+    public UserDto() {
+    }
+
+    public Set<RoleDto> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<RoleEntity> roles) {
+    public void setRoles(Set<RoleDto> roles) {
         this.roles = roles;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -111,11 +105,4 @@ public class UserEntity {
         this.password = password;
     }
 
-    public Set<RouteEntity> getRouteNames() {
-        return routeNames;
-    }
-
-    public void setRouteNames(Set<RouteEntity> routeNames) {
-        this.routeNames = routeNames;
-    }
 }
