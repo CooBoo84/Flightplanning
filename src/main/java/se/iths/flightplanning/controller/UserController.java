@@ -2,18 +2,25 @@ package se.iths.flightplanning.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import se.iths.flightplanning.dto.UserDto;
 import se.iths.flightplanning.entity.UserEntity;
+import se.iths.flightplanning.repository.UserRepository;
 import se.iths.flightplanning.service.UserService;
 
 import java.util.Optional;
 
 @RestController
 @RequestMapping("users")
+@Validated
 public class UserController {
+
+    @Autowired
+    UserRepository userRepository;
 
     private final UserService userService;
     Logger logger = LoggerFactory.getLogger(UserController.class);

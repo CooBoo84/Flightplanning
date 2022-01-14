@@ -1,12 +1,14 @@
 package se.iths.flightplanning.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class UserEntity {
+public class UserEntity implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,7 +16,7 @@ public class UserEntity {
     private String lastName;
     private String email;
     private String telephone;
-    private String username;
+    static private String username;
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -95,7 +97,7 @@ public class UserEntity {
         this.telephone = telephone;
     }
 
-    public String getUsername() {
+    public static String getUsername() {
         return username;
     }
 

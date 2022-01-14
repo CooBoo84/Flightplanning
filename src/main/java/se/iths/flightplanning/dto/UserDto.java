@@ -2,10 +2,13 @@ package se.iths.flightplanning.dto;
 
 import se.iths.flightplanning.entity.RoleEntity;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class UserDto {
+public class UserDto implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Long id;
     private String firstName;

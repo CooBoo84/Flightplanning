@@ -31,12 +31,12 @@ public class UserService implements UserServiceDto{
         this.roleMapper = roleMapper;
     }
 
-//    public UserEntity createUser(UserEntity userEntity) {
-//        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-//        RoleEntity roleToAdd = roleRepository.findByRole("ROLE_USER");
-//        userEntity.addRole(roleToAdd);
-//        return userRepository.save(userEntity);
-//    }
+    public UserEntity createUser(UserEntity userEntity) {
+        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        RoleEntity roleToAdd = roleRepository.findByRole("ROLE_USER");
+        userEntity.addRole(roleToAdd);
+        return userRepository.save(userEntity);
+    }
 
     public void deleteUser(Long id) {
         UserEntity foundUser = userRepository.findById(id).orElseThrow(EntityNotFoundException::new);  //Optional förhindrar nullpointExceptions

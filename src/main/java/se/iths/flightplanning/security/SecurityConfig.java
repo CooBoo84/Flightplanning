@@ -2,53 +2,60 @@ package se.iths.flightplanning.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final LoppisUserDetailsService userDetailsService;
-
-    public SecurityConfig(LoppisUserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
-
+    @Resource
+    private UserDetailsService userDetailsService;
     @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider provider =  new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(new BCryptPasswordEncoder());
-        return provider;
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter();
     }
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(authenticationProvider());
-//    }
-
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .headers().frameOptions().sameOrigin()
+                .and()
                 .csrf().disable()
-                .httpBasic()
-                .and()
                 .authorizeRequests()
-                .antMatchers("/","/users","/users/signup", "/food","/food/{id}", "/routes","/routes/{id}", "/workers", "/workers/{id}").permitAll()
-                .antMatchers("/admin","/airplanes", "/airplanes/{id}").hasRole("ADMIN")
-                .anyRequest().authenticated()
+                .antMatchers("/signin", "/login", "/", "/admin", "/application", "/auth/signin", "/users/signup", "/employees", "/customers", "/airplanes").permitAll()
+                .antMatchers("/**").authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login").permitAll()
-                .defaultSuccessUrl("/application.html", true)
+                .exceptionHandling()
+                .authenticationEntryPoint((req, res, ex) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "UNAUTHORIZED : " + ex.getMessage()))
                 .and()
-                .logout()
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .permitAll();
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }
