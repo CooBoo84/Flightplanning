@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import se.iths.flightplanning.dto.UserDto;
@@ -22,6 +23,9 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    private JmsTemplate jmsTemplate;
+
     private final UserService userService;
     Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -37,6 +41,7 @@ public class UserController {
     @PostMapping("signup")
     public ResponseEntity<UserDto> createUser(@RequestBody UserEntity user) {
         UserDto createdUser = userService.createUserDto(user);
+        jmsTemplate.convertAndSend("user", user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 

@@ -20,7 +20,7 @@ Laboration with myself, Hans, Gustaf and Athanasios.
 ## Routes
 ### Create a new route
 ``
-POST - http://localhost:8080/routes
+POST - http://localhost:8080/FlightApp/routes
 ``
 - JSON-body
 ```
@@ -30,13 +30,13 @@ POST - http://localhost:8080/routes
 ```
 ### Get all routes
 ``
-GET - http://localhost:8080/routes
+GET - http://localhost:8080/FlightApp/routes
 ``
 
 ## Airplanes
 ### Create a new airplane
 ``
-POST - http://localhost:8080/airplanes
+POST - http://localhost:8080/FlightApp/airplanes
 ``
 - JSON-body
 ```
@@ -49,29 +49,29 @@ POST - http://localhost:8080/airplanes
 
 ### Get all airplanes
 ``
-GET - http://localhost:8080/airplanes
+GET - http://localhost:8080/FlightApp/airplanes
 ``
 
 ### Get a airplane by ID
 ``
-GET - http://localhost:8080/airplanes/{id}
+GET - http://localhost:8080/FlightApp/airplanes/{id}
 ``
 | Example |
 | --- |
-| localhost:8080/airplanes/1 |
+| localhost:8080/FlightApp/airplanes/1 |
 
 ### Delete a airplane by ID
 ``
-DELETE - http://localhost:8080/airplanes/{id}
+DELETE - http://localhost:8080/FlightApp/airplanes/{id}
 ``
 | Example |
 | --- |
-| localhost:8080/airplanes/1 |
+| localhost:8080/FlightApp/airplanes/1 |
 
 ## Protections
 ### Create a new protection
 ``
-POST - http://localhost:8080/cancellationprotections
+POST - http://localhost:8080/FlightApp/cancellationprotections
 ``
 - JSON-body
 ```
@@ -82,21 +82,21 @@ POST - http://localhost:8080/cancellationprotections
 
 ### Get all protections
 ``
-GET - http://localhost:8080/cancellationprotections
+GET - http://localhost:8080/FlightApp/cancellationprotections
 ``
 
 ### Delete protection by ID
 ``
-DELETE - http://localhost:8080/cancellationprotections/{id}
+DELETE - http://localhost:8080/FlightApp/cancellationprotections/{id}
 ``
 | Example |
 | --- |
-| localhost:8080/cancellationprotections/1 |
+| localhost:8080/FlightApp/cancellationprotections/1 |
 
 ## Food
 ### Create food
 ``
-POST - http://localhost:8080/food
+POST - http://localhost:8080/FlightApp/food
 ``
 - JSON-body
 ```
@@ -107,29 +107,29 @@ POST - http://localhost:8080/food
 
 ### Get all food
 ``
-GET - http://localhost:8080/food
+GET - http://localhost:8080/FlightApp/food
 ``
 
 ### Get food by ID
 ``
-GET - http://localhost:8080/food/{id}
+GET - http://localhost:8080/FlightApp/food/{id}
 ``
 | Example |
 | --- |
-| localhost:8080/food/1 |
+| localhost:8080/FlightApp/food/1 |
 
 ### Delete food by ID
 ``
-DELETE - http://localhost:8080/food/{id}
+DELETE - http://localhost:8080/FlightApp/food/{id}
 ``
 | Example |
 | --- |
-| localhost:8080/food/1 |
+| localhost:8080/FlightApp/food/1 |
 
 ## Workers
 ### Create a new worker
 ``
-POST - http://localhost:8080/workers
+POST - http://localhost:8080/FlightApp/workers
 ``
 - JSON-body
 ```
@@ -141,13 +141,13 @@ POST - http://localhost:8080/workers
 
 ### Get all workers
 ``
-GET - http://localhost:8080/workers
+GET - http://localhost:8080/FlightApp/workers
 ``
 
 ### Delete worker by ID
 ``
-DELETE - http://localhost:8080/workers/{id}
+DELETE - http://localhost:8080/FlightApp/workers/{id}
 ``
 | Example |
 | --- |
-| localhost:8080/workers/1 |
+| localhost:8080/FlightApp/workers/1 |
