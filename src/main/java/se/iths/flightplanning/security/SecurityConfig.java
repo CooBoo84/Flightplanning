@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
-                .defaultSuccessUrl("/korv.html", true)
+                .defaultSuccessUrl("/application.html", true)
                 .and()
                 .logout()
                 .invalidateHttpSession(true)
