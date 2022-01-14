@@ -17,13 +17,14 @@ public class CustomUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        //final UserEntity user = userRepository.findByUsername(username);
-        final UserEntity user = userRepository.findByEmail(username);
+        final UserEntity user = userRepository.findByUsername(username);
+        System.out.println("------------------- username --------------------- " + username);
+        System.out.println("------------------- user --------------------- " + user);
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
         UserDetails userDetails = User.withUsername(user.getUsername()).password(user.getPassword()).authorities("ROLE_USER", "ROLE_ADMIN").build();
+        System.out.println("------------------- userDetails --------------------- " + userDetails);
         return userDetails;
     }
 }
-

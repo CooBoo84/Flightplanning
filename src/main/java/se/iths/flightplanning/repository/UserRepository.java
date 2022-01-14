@@ -6,6 +6,6 @@ import se.iths.flightplanning.entity.UserEntity;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-    //UserEntity findByUsername (String username);
-    UserEntity findByEmail (String email);
+    UserEntity findByUsername (String username);
+    //UserEntity findByEmail (String email);
 }

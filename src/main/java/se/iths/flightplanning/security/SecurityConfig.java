@@ -9,10 +9,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import se.iths.flightplanning.service.CustomUserDetailService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
-    private UserDetailsService userDetailsService;
+    private CustomUserDetailService userDetailsService;
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter();
@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/signin", "/login", "/", "/admin", "/application", "/auth/signin", "/users/signup", "/employees", "/customers", "/airplanes").permitAll()
+                .antMatchers("/signin", "/login", "/", "/admin", "/application", "/auth/signin", "/users/signup", "/employees", "/customers", "/roles").permitAll()
                 .antMatchers("/**").authenticated()
                 .and()
                 .exceptionHandling()

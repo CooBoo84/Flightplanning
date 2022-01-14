@@ -16,7 +16,7 @@ public class UserEntity implements Serializable {
     private String lastName;
     private String email;
     private String telephone;
-    static private String username;
+    private String username;
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -97,7 +97,7 @@ public class UserEntity implements Serializable {
         this.telephone = telephone;
     }
 
-    public static String getUsername() {
+    public String getUsername() {
         return username;
     }
 

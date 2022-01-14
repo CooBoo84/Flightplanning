@@ -8,7 +8,6 @@ public class RoleDto {
     private Long id;
     private String role;
 
-    @ManyToMany(mappedBy = "roles")
     private Set<UserDto> users;
 
     public RoleDto(String role) {
