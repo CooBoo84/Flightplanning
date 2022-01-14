@@ -14,15 +14,13 @@ public class AirplaneMapper {
     }
 
     public AirplaneDto mapp(AirplaneEntity airplaneEntity) {
-        return new AirplaneDto(airplaneEntity.getId(),
-                airplaneEntity.getAirplaneName(),
+        return new AirplaneDto(airplaneEntity.getAirplaneName(),
                 airplaneEntity.getNumberOfSeat(),
                 airplaneEntity.getNumberOfStaff());
     }
 
     public AirplaneEntity mapp(AirplaneDto airplaneDto) {
         return new AirplaneEntity(
-                airplaneDto.getId(),
                 airplaneDto.getAirplaneName(),
                 airplaneDto.getNumberOfSeat(),
                 airplaneDto.getNumberOfStaff());

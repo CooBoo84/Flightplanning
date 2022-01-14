@@ -15,4 +15,3 @@ public interface FoodServiceDto {
 
     void deleteFoodById(Long id);
 }
-

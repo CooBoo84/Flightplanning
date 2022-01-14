@@ -17,7 +17,7 @@ public class RouteEntity {
 
 
     @ManyToMany(mappedBy = "routeNames", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<CustomerEntity> users;
+    private Set<UserEntity> users;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<AirplaneEntity> airplaneNames = new HashSet<>();
@@ -25,12 +25,8 @@ public class RouteEntity {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private FoodEntity foods;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private CancellationProtectionEntity cancel;
 
-
-    public RouteEntity(Long id,String routeName) {
-        this.id = id;
+    public RouteEntity(String routeName) {
         this.routeName = routeName;
     }
 
@@ -44,14 +40,6 @@ public class RouteEntity {
 
     public void setAirplaneNames(Set<AirplaneEntity> airplaneNames) {
         this.airplaneNames = airplaneNames;
-    }
-
-    public CancellationProtectionEntity getCancel() {
-        return cancel;
-    }
-
-    public void setCancel(CancellationProtectionEntity cancel) {
-        this.cancel = cancel;
     }
 
     public Long getId() {
@@ -71,11 +59,11 @@ public class RouteEntity {
     }
 
     @JsonIgnore
-    public Set<CustomerEntity> getUsers() {
+    public Set<UserEntity> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<CustomerEntity> users) {
+    public void setUsers(Set<UserEntity> users) {
         this.users = users;
     }
 

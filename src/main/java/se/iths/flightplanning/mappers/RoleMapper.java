@@ -14,7 +14,7 @@ public class RoleMapper {
     }
 
     public RoleDto mapp(RoleEntity roleEntity){
-        return new RoleDto(roleEntity.getId(),roleEntity.getRole());
+        return new RoleDto(roleEntity.getRole());
     }
     public RoleEntity mapp(RoleDto roleDto){
         return new RoleEntity(roleDto.getRole());
@@ -22,7 +22,7 @@ public class RoleMapper {
     public Optional<RoleDto> mapp(Optional<RoleEntity> optionalRoleEntity){
         if(optionalRoleEntity.isEmpty())
             return Optional.empty();
-            return Optional.of(mapp(optionalRoleEntity.get()));
+        return Optional.of(mapp(optionalRoleEntity.get()));
     }
 
     public List<RoleDto> mapp(List<RoleEntity> all){

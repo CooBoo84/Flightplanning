@@ -10,19 +10,21 @@ import java.util.stream.Collectors;
 
 @Component
 public class FoodMapper {
+
+
     public FoodMapper() {
     }
 
     public FoodDto mapp(FoodEntity foodEntity) {
-        return new FoodDto(foodEntity.getId(), foodEntity.getFood());
+        return new FoodDto(foodEntity.getFood());
     }
 
     public FoodEntity mapp(FoodDto foodDto) {
-        return new FoodEntity(foodDto.getId(), foodDto.getFood());
+        return new FoodEntity(foodDto.getFood());
     }
 
     public Optional<FoodDto> mapp(Optional<FoodEntity> optionalFoodEntity) {
-        if(optionalFoodEntity.isEmpty())
+        if (optionalFoodEntity.isEmpty())
             return Optional.empty();
         return Optional.of(mapp(optionalFoodEntity.get()));
     }
@@ -33,5 +35,4 @@ public class FoodMapper {
                 .map(this::mapp)
                 .collect(Collectors.toList());
     }
-
 }

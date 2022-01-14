@@ -18,7 +18,7 @@ public class FoodEntity {
     private RouteEntity foodRoute;
 
 
-    public FoodEntity(long id, String food) {
+    public FoodEntity(String food) {
         this.food = food;
     }
 

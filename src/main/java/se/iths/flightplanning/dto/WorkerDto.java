@@ -6,8 +6,7 @@ public class WorkerDto {
     private int pilot;
     private int flightAttendant;
 
-    public WorkerDto(long id, int pilot, int flightAttendant) {
-        this.id = id;
+    public WorkerDto(int pilot, int flightAttendant) {
         this.pilot = pilot;
         this.flightAttendant = flightAttendant;
     }

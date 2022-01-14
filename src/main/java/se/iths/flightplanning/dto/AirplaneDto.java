@@ -8,8 +8,7 @@ public class AirplaneDto {
     private int numberOfSeat;
     private int numberOfStaff;
 
-    public AirplaneDto(long id, String airplaneName, int numberOfSeat, int numberOfStaff) {
-        this.id = id;
+    public AirplaneDto(String airplaneName, int numberOfSeat, int numberOfStaff) {
         this.airplaneName = airplaneName;
         this.numberOfSeat = numberOfSeat;
         this.numberOfStaff = numberOfStaff;

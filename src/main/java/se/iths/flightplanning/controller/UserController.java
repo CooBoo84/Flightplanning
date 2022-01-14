@@ -1,15 +1,14 @@
 package se.iths.flightplanning.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
+import se.iths.flightplanning.dto.UserDto;
 import se.iths.flightplanning.entity.UserEntity;
-import se.iths.flightplanning.exception.EmptyListException;
-import se.iths.flightplanning.exception.ResourceNotFoundException;
 import se.iths.flightplanning.service.UserService;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @RestController
@@ -17,68 +16,38 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
-
+    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
+//    @PostMapping("signup")
+//    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user) {
+//        UserEntity createdUser = userService.createUser(user);
+//        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+//    }
     @PostMapping("signup")
-    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user) {
-        UserEntity createdUser = userService.createUser(user);
-
+    public ResponseEntity<UserDto> createUser(@RequestBody UserEntity user) {
+        UserDto createdUser = userService.createUserDto(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-
-    @GetMapping
-    public ResponseEntity<Iterable<UserEntity>> findAllUsers() {
-        Iterable<UserEntity> allUsers = userService.findAllUsers();
-        if (allUsers.iterator().hasNext())
-            return new ResponseEntity<>(allUsers, HttpStatus.OK);
-        else
-            throw new EmptyListException("Users list is empty.");
-    }
-
-    @GetMapping("{id}")
-    public ResponseEntity<UserEntity> findUserById(@PathVariable Long id) {
-        UserEntity foundUser = userService.findUserById(id);
-        if (foundUser == null) {
-            throw new ResourceNotFoundException("User with id :" + id + " could not be found.");
-        }
-        return new ResponseEntity<>(foundUser, HttpStatus.OK);
-    }
-
-    @GetMapping("/username")
-    public ResponseEntity<UserEntity> findUserByUsername(@RequestParam String username) {
-        UserEntity foundUser = userService.findUserByUsername(username);
-        if (foundUser == null) {
-            throw new ResourceNotFoundException("User with username :" + username + " could not be found.");
-        }
-        return new ResponseEntity<>(foundUser, HttpStatus.OK);
-    }
-
-    @GetMapping("/email")
-    public ResponseEntity<UserEntity> findUserByEmail(@RequestParam String email) {
-        UserEntity foundUser = userService.findUserByEmail(email);
-        if (foundUser == null) {
-            throw new ResourceNotFoundException("User with email-adress :" + email + " could not be found.");
-        }
-        return new ResponseEntity<>(foundUser, HttpStatus.OK);
-    }
-
-    @DeleteMapping("")
-    public ResponseEntity<Void> deleteUserByUsername(@RequestParam String username) {
-        userService.deleteUserByUsername(username);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<Optional<UserEntity>> findUserById(@PathVariable Long id) {
+        Optional<UserEntity> foundUser = userService.findUserById(id);
+        return new ResponseEntity<>(foundUser, HttpStatus.OK);
+    }
 
+    @GetMapping()
+    public ResponseEntity<Iterable<UserEntity>> findAllUsers() {
+        Iterable<UserEntity> allUsers = userService.findAllUsers();
+        return new ResponseEntity<>(allUsers, HttpStatus.OK);
+    }
 }
-
