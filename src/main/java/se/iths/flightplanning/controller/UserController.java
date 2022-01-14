@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import se.iths.flightplanning.dto.UserDto;
 import se.iths.flightplanning.entity.UserEntity;
 import se.iths.flightplanning.service.UserService;
 
@@ -21,9 +22,14 @@ public class UserController {
         this.userService = userService;
     }
 
+//    @PostMapping("signup")
+//    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user) {
+//        UserEntity createdUser = userService.createUser(user);
+//        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+//    }
     @PostMapping("signup")
-    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user) {
-        UserEntity createdUser = userService.createUser(user);
+    public ResponseEntity<UserDto> createUser(@RequestBody UserEntity user) {
+        UserDto createdUser = userService.createUserDto(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 

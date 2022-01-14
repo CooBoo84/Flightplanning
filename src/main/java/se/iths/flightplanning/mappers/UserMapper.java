@@ -11,7 +11,8 @@ import java.util.stream.Collectors;
 @Component
 public class UserMapper {
     public UserDto mapp(UserEntity userEntity) {
-        return new UserDto(userEntity.getFirstName(),
+        return new UserDto(userEntity.getId(),
+                userEntity.getFirstName(),
                 userEntity.getLastName(),
                 userEntity.getEmail(),
                 userEntity.getTelephone(),
@@ -29,10 +30,10 @@ public class UserMapper {
                 userDto.getPassword());
     }
 
-    public Optional<UserDto> mapp(Optional<UserEntity> optionalCustomerEntity) {
-        if(optionalCustomerEntity.isEmpty())
+    public Optional<UserDto> mapp(Optional<UserEntity> optionalUserEntity) {
+        if(optionalUserEntity.isEmpty())
             return Optional.empty();
-        return Optional.of(mapp(optionalCustomerEntity.get()));
+        return Optional.of(mapp(optionalUserEntity.get()));
     }
 
     public List<UserDto> mapp(List<UserEntity> all) {
