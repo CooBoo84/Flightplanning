@@ -7,11 +7,11 @@ import java.util.Optional;
 
 public interface AirplaneServiceDto {
 
-    List<AirplaneDto> findAllPlanes();
+    Iterable<AirplaneDto> findAllPlanesDTO();
 
-    Optional<AirplaneDto> getAirplaneById(Long id);
-
-    AirplaneDto createPlane(AirplaneDto airplaneDto);
-
-    void deleteById(Long id);
+//    Optional<AirplaneDto> getAirplaneById(Long id);
+//
+//    AirplaneDto createPlane(AirplaneDto airplaneDto);
+//
+//    void deleteById(Long id);
 }

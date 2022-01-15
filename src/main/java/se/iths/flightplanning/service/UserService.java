@@ -2,7 +2,6 @@ package se.iths.flightplanning.service;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import se.iths.flightplanning.dto.RoleDto;
 import se.iths.flightplanning.dto.UserDto;
 import se.iths.flightplanning.entity.RoleEntity;
 import se.iths.flightplanning.entity.UserEntity;
@@ -12,7 +11,6 @@ import se.iths.flightplanning.repository.RoleRepository;
 import se.iths.flightplanning.repository.UserRepository;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
 import java.util.Optional;
 
 @Service

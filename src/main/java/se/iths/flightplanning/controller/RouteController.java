@@ -3,6 +3,7 @@ package se.iths.flightplanning.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import se.iths.flightplanning.dto.RouteDto;
 import se.iths.flightplanning.entity.RouteEntity;
 import se.iths.flightplanning.service.RouteService;
 
@@ -25,6 +26,11 @@ public class RouteController {
     @GetMapping()
     public ResponseEntity<Iterable<RouteEntity>> findAllRoutes() {
         Iterable<RouteEntity> allRoutes = routeService.findAllRoutes();
+        return new ResponseEntity<>(allRoutes, HttpStatus.OK);
+    }
+    @GetMapping("routeDto")
+    public ResponseEntity<Iterable<RouteDto>> findAllRoutesDto() {
+        Iterable<RouteDto> allRoutes = routeService.findAllRoutesDto();
         return new ResponseEntity<>(allRoutes, HttpStatus.OK);
     }
 }

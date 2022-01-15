@@ -7,11 +7,11 @@ import java.util.Optional;
 
 public interface RouteServiceDto {
 
-    List<RouteDto> findAllRoutes();
+     Iterable<RouteDto> findAllRoutesDto();
 
-    Optional<RouteDto> getRouteByid(Long id);
-
-    RouteDto createRoute(RouteDto routeDto);
-
-    void deleteRouteById(Long id);
+//    Optional<RouteDto> getRouteByid(Long id);
+//
+//    RouteDto createRoute(RouteDto routeDto);
+//
+//    void deleteRouteById(Long id);
 }

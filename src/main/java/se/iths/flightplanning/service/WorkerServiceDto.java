@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface WorkerServiceDto {
 
-    WorkerDto createWorker(WorkerDto workerDto);
+     //WorkerDto createWorker(WorkerDto workerDto);
 
-    List<WorkerDto> findAllWorkers();
+    Iterable<WorkerDto> findAllWorkersDto();
 
-    void deleteById(Long id);
+   // void deleteById(Long id);
 }
