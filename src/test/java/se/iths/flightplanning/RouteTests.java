@@ -15,9 +15,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import se.iths.flightplanning.controller.AirplaneController;
-import se.iths.flightplanning.dto.AirplaneDto;
-import se.iths.flightplanning.service.AirplaneServiceDto;
+import se.iths.flightplanning.controller.RouteController;
+import se.iths.flightplanning.dto.RouteDto;
+import se.iths.flightplanning.service.RouteServiceDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,34 +27,34 @@ import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = AirplaneController.class)
+@SpringBootTest(classes = RouteController.class)
 @AutoConfigureMockMvc
 @EnableWebMvc
-public class AirplaneTests extends WebSecurityConfigurerAdapter {
+public class RouteTests extends WebSecurityConfigurerAdapter {
 
     @MockBean
-    AirplaneServiceDto airplaneServiceDto;
+    RouteServiceDto routeServiceDto;
 
     @MockBean
-    AirplaneDto airplaneDto;
+    RouteDto routeDto;
 
     @MockBean
-    AirplaneController airplaneController;
+    RouteController routeController;
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void testFoodControllerInitializedCorrectly() {
-        assertThat(airplaneController).isNotNull();
+    public void testRouteControllerInitializedCorrectly() {
+        assertThat(routeController).isNotNull();
     }
 
     @Test
-    void testReturnAllAirplanesSuccess() throws Exception {
+    void testReturnAllRoutesSuccess() throws Exception {
 
-        when(airplaneServiceDto.findAllPlanes()).thenReturn(List.of(new AirplaneDto("Model-X", 222, 22)));
+        when(routeServiceDto.findAllRoutes()).thenReturn(List.of(new RouteDto("Gbg-Sth")));
 
-        var result = mockMvc.perform(MockMvcRequestBuilders.get("/airplanes")
+        var result = mockMvc.perform(MockMvcRequestBuilders.get("/routes")
                         .with(SecurityMockMvcRequestPostProcessors.user("kungen").roles("ADMIN"))
                         .with(csrf())
                         .accept(MediaType.APPLICATION_JSON))
@@ -63,11 +63,11 @@ public class AirplaneTests extends WebSecurityConfigurerAdapter {
     }
 
     @Test
-    void testReturnOneAirplaneSuccess() throws Exception {
+    void testReturnOneRouteSuccess() throws Exception {
 
-        when(airplaneServiceDto.getAirplaneById(1L)).thenReturn(Optional.of(new AirplaneDto( "Model-Y", 333, 33)));
+        when(routeServiceDto.getRouteById(1L)).thenReturn(Optional.of(new RouteDto( "LA-Gbg")));
 
-        var result = mockMvc.perform(MockMvcRequestBuilders.get("/airplanes/{id}", "1")
+        var result = mockMvc.perform(MockMvcRequestBuilders.get("/routes/{id}", "1")
                         .with(SecurityMockMvcRequestPostProcessors.user("kungen").roles("ADMIN"))
                         .with(csrf())
                         .accept(MediaType.APPLICATION_JSON))
@@ -76,26 +76,26 @@ public class AirplaneTests extends WebSecurityConfigurerAdapter {
     }
 
     @Test
-    public void testCreateAirplaneSuccess() throws Exception {
-        AirplaneDto airplane = new AirplaneDto("Model-Z", 333, 33);
+    public void testCreateRouteSuccess() throws Exception {
+        RouteDto route = new RouteDto("Lnd-Gbg");
         Gson gson = new Gson();
-        when(airplaneServiceDto.createPlane(airplane)).thenReturn(airplane);
+        when(routeServiceDto.createRoute(route)).thenReturn(route);
 
-        var result = mockMvc.perform(MockMvcRequestBuilders.post("/airplanes")
+        var result = mockMvc.perform(MockMvcRequestBuilders.post("/routes")
                         .with(SecurityMockMvcRequestPostProcessors.user("kungen").roles("ADMIN"))
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(gson.toJson(airplane))
+                        .content(gson.toJson(route))
                         .accept(MediaType.APPLICATION_JSON))
                 .andReturn();
         assertThat(result.getResponse().getStatus()).isEqualTo(200);
     }
 
     @Test
-    void testDeleteAirplaneSuccess() throws Exception {
-        new AirplaneDto("Model-Z", 333, 33);
-        airplaneServiceDto.deleteById(1L);
-        Mockito.verify(airplaneServiceDto).deleteById(1L);
+    void testDeleteRouteSuccess() throws Exception {
+        new RouteDto("Malmö-Umeå");
+        routeServiceDto.deleteRouteById(1L);
+        Mockito.verify(routeServiceDto).deleteRouteById(1L);
     }
 
 }

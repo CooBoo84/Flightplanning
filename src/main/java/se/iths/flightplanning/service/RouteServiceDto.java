@@ -9,7 +9,7 @@ public interface RouteServiceDto {
 
     List<RouteDto> findAllRoutes();
 
-    Optional<RouteDto> getRouteByid(Long id);
+    Optional<RouteDto> getRouteById(Long id);
 
     RouteDto createRoute(RouteDto routeDto);
 
