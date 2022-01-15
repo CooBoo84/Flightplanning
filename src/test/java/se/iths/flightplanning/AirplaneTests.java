@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import se.iths.flightplanning.controller.AirplaneController;
 import se.iths.flightplanning.dto.AirplaneDto;
+import se.iths.flightplanning.repository.AirplaneRepository;
 import se.iths.flightplanning.service.AirplaneServiceDto;
 
 import java.util.List;
@@ -25,6 +26,9 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AirplaneController.class)
@@ -41,11 +45,14 @@ public class AirplaneTests extends WebSecurityConfigurerAdapter {
     @MockBean
     AirplaneController airplaneController;
 
+    @MockBean
+    private AirplaneRepository airplaneRepository;
+
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void testFoodControllerInitializedCorrectly() {
+    public void testAirplaneControllerInitializedCorrectly() {
         assertThat(airplaneController).isNotNull();
     }
 
@@ -96,6 +103,16 @@ public class AirplaneTests extends WebSecurityConfigurerAdapter {
         new AirplaneDto("Model-Z", 333, 33);
         airplaneServiceDto.deleteById(1L);
         Mockito.verify(airplaneServiceDto).deleteById(1L);
+    }
+
+    @Test
+    public void findNoLoginRejected() throws Exception {
+        when(airplaneServiceDto.getAirplaneById(1L)).thenReturn(Optional.of(new AirplaneDto( "Model-101", 100, 10)));
+        mockMvc.perform(get("/airplanes/1"))
+                .andDo(print())
+                .andExpect(status().isUnauthorized());
+
+        System.out.println("------------------- AirplaneControllerTest findNoLoginRejected ------------------------------");
     }
 
 }
