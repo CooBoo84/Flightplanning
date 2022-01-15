@@ -10,7 +10,7 @@ public class UserDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+   // private Long id;
     private String firstName;
     private String lastName;
     private String email;
@@ -19,14 +19,24 @@ public class UserDto implements Serializable {
     private String password;
 
 
-    public UserDto(Long id,String firstName, String lastName, String email, String telephone, String username, String password) {
-        this.id = id;
+//    public UserDto(String firstName, String lastName, String email, String telephone,String username,String password) {
+//       // this.id = id;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.telephone = telephone;
+//        this.username = username;
+//        this.password = password;
+//    }
+
+
+    public UserDto(String firstName, String lastName, String email, String telephone) {
+        // this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.telephone = telephone;
-        this.username = username;
-        this.password = password;
+
     }
 
     private Set<RoleDto> roles = new HashSet<>();
@@ -53,13 +63,13 @@ public class UserDto implements Serializable {
         this.roles = roles;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getFirstName() {
         return firstName;
