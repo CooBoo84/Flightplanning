@@ -1,5 +1,6 @@
 package se.iths.flightplanning.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import se.iths.flightplanning.entity.RoleEntity;
 
 import java.io.Serializable;
@@ -55,6 +56,7 @@ public class UserDto implements Serializable {
     public UserDto() {
     }
 
+    @JsonIgnore
     public Set<RoleDto> getRoles() {
         return roles;
     }
@@ -102,7 +104,7 @@ public class UserDto implements Serializable {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-
+    @JsonIgnore
     public String getUsername() {
         return username;
     }
@@ -110,7 +112,7 @@ public class UserDto implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
-
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
