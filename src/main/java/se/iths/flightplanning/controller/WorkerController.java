@@ -3,7 +3,12 @@ package se.iths.flightplanning.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import se.iths.flightplanning.dto.WorkerDto;
+
+import org.springframework.web.server.ResponseStatusException;
+import se.iths.flightplanning.entity.RouteEntity;
+
 import se.iths.flightplanning.entity.WorkerEntity;
 import se.iths.flightplanning.service.WorkerService;
 
@@ -35,10 +40,16 @@ public class WorkerController {
         return new ResponseEntity<>(allStaff, HttpStatus.OK);
     }
 
+    @GetMapping("{id}")
+    public WorkerEntity findWorkerById(@PathVariable Long id) {
+        return workerService.getWorkerById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Id " + id + " not found."));
+    }
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteWorkerById(@PathVariable Long id) {
-        workerService.deleteById(id);
+        workerService.deleteWorkerById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

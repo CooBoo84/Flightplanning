@@ -28,7 +28,7 @@ public class RouteService implements RouteServiceDto {
         return routeMapper.mapp(routeRepository.findAll());
     }
 
-    public Optional<RouteEntity> getRouteByid(Long id) {
+    public Optional<RouteEntity> getRouteById(Long id) {
         return routeRepository.findById(id);
     }
 
