@@ -12,6 +12,7 @@ import se.iths.flightplanning.repository.RoleRepository;
 import se.iths.flightplanning.repository.UserRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,6 +26,7 @@ public class UserService implements UserServiceDto{
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public UserService(UserRepository userRepository, RoleRepository roleRepository, UserMapper userMapper, RoleMapper roleMapper) {
+        super();
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
         this.userMapper = userMapper;
@@ -54,19 +56,24 @@ public class UserService implements UserServiceDto{
 //
 //        userDto.addRole(addRole);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        RoleEntity roleToAdd = roleRepository.findByRole("ROLE_USER");
+        RoleEntity roleToAdd = roleRepository.findByRole("ROLE_VIP");
         user.addRole(roleToAdd);
         userRepository.save(user);
-
         UserDto userDto = userMapper.mapp(user);
 
         return userDto;
-
-
     }
+
 
     public Iterable<UserEntity> findAllUsers() {
         return userRepository.findAll();
+    }
+
+
+    public Iterable<UserDto> findAllUsersDTO() {
+
+        return userMapper.mapp(userRepository.findAll());
+
     }
 
 }

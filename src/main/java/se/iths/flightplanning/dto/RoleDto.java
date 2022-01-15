@@ -1,6 +1,5 @@
 package se.iths.flightplanning.dto;
 
-import javax.persistence.ManyToMany;
 import java.util.Set;
 
 public class RoleDto {

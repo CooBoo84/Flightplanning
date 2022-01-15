@@ -1,10 +1,15 @@
 package se.iths.flightplanning.service;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import se.iths.flightplanning.dto.UserDto;
 import se.iths.flightplanning.entity.UserEntity;
 
-public interface UserServiceDto {
+import java.util.List;
+
+public interface UserServiceDto  {
     UserDto createUserDto(UserEntity user);
 
-    Iterable<UserEntity> findAllUsers();
+   // Iterable<UserEntity> findAllUsers();
+
+   Iterable<UserDto> findAllUsersDTO();
 }
