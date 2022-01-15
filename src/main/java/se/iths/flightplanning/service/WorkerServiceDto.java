@@ -8,11 +8,10 @@ import java.util.Optional;
 
 public interface WorkerServiceDto {
 
-    WorkerDto createWorker(WorkerDto workerDto);
+     //WorkerDto createWorker(WorkerDto workerDto);
 
-    List<WorkerDto> findAllWorkers();
+    Iterable<WorkerDto> findAllWorkersDto();
 
-    Optional<WorkerDto> getWorkerById(Long id);
 
-    void deleteWorkerById(Long id);
+   // void deleteById(Long id);
 }
