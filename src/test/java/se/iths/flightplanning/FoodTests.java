@@ -16,10 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import se.iths.flightplanning.controller.FoodController;
-import se.iths.flightplanning.dto.FoodDto;
 import se.iths.flightplanning.entity.FoodEntity;
 import se.iths.flightplanning.service.FoodService;
-import se.iths.flightplanning.service.FoodServiceDto;
 
 import java.util.List;
 import java.util.Optional;
