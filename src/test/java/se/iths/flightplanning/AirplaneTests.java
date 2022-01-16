@@ -17,7 +17,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import se.iths.flightplanning.controller.AirplaneController;
 import se.iths.flightplanning.dto.AirplaneDto;
+import se.iths.flightplanning.entity.AirplaneEntity;
 import se.iths.flightplanning.repository.AirplaneRepository;
+import se.iths.flightplanning.service.AirplaneService;
 import se.iths.flightplanning.service.AirplaneServiceDto;
 
 import java.util.List;
@@ -37,7 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class AirplaneTests extends WebSecurityConfigurerAdapter {
 
     @MockBean
-    AirplaneServiceDto airplaneServiceDto;
+    AirplaneService airplaneService;
 
     @MockBean
     AirplaneDto airplaneDto;
@@ -59,7 +61,7 @@ public class AirplaneTests extends WebSecurityConfigurerAdapter {
     @Test
     void testReturnAllAirplanesSuccess() throws Exception {
 
-        when(airplaneServiceDto.findAllPlanes()).thenReturn(List.of(new AirplaneDto("Model-X", 222, 22)));
+        when(airplaneService.findAllPlanes()).thenReturn(List.of(new AirplaneEntity("Model-X", 222, 22)));
 
         var result = mockMvc.perform(MockMvcRequestBuilders.get("/airplanes")
                         .with(SecurityMockMvcRequestPostProcessors.user("kungen").roles("ADMIN"))
@@ -72,7 +74,7 @@ public class AirplaneTests extends WebSecurityConfigurerAdapter {
     @Test
     void testReturnOneAirplaneSuccess() throws Exception {
 
-        when(airplaneServiceDto.getAirplaneById(1L)).thenReturn(Optional.of(new AirplaneDto( "Model-Y", 333, 33)));
+        when(airplaneService.getAirplaneById(1L)).thenReturn(Optional.of(new AirplaneEntity( "Model-Y", 333, 33)));
 
         var result = mockMvc.perform(MockMvcRequestBuilders.get("/airplanes/{id}", "1")
                         .with(SecurityMockMvcRequestPostProcessors.user("kungen").roles("ADMIN"))
@@ -84,9 +86,9 @@ public class AirplaneTests extends WebSecurityConfigurerAdapter {
 
     @Test
     public void testCreateAirplaneSuccess() throws Exception {
-        AirplaneDto airplane = new AirplaneDto("Model-Z", 333, 33);
+        AirplaneEntity airplane = new AirplaneEntity("Model-Z", 333, 33);
         Gson gson = new Gson();
-        when(airplaneServiceDto.createPlane(airplane)).thenReturn(airplane);
+        when(airplaneService.createPlane(airplane)).thenReturn(airplane);
 
         var result = mockMvc.perform(MockMvcRequestBuilders.post("/airplanes")
                         .with(SecurityMockMvcRequestPostProcessors.user("kungen").roles("ADMIN"))
@@ -100,14 +102,14 @@ public class AirplaneTests extends WebSecurityConfigurerAdapter {
 
     @Test
     void testDeleteAirplaneSuccess() throws Exception {
-        new AirplaneDto("Model-Z", 333, 33);
-        airplaneServiceDto.deleteById(1L);
-        Mockito.verify(airplaneServiceDto).deleteById(1L);
+        new AirplaneEntity("Model-Z", 333, 33);
+        airplaneService.deleteById(1L);
+        Mockito.verify(airplaneService).deleteById(1L);
     }
 
     @Test
     public void findNoLoginRejected() throws Exception {
-        when(airplaneServiceDto.getAirplaneById(1L)).thenReturn(Optional.of(new AirplaneDto( "Model-101", 100, 10)));
+        when(airplaneService.getAirplaneById(1L)).thenReturn(Optional.of(new AirplaneEntity( "Model-101", 100, 10)));
         mockMvc.perform(get("/airplanes/1"))
                 .andDo(print())
                 .andExpect(status().isUnauthorized());

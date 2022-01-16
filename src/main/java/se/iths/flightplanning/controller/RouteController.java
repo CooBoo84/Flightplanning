@@ -37,7 +37,7 @@ public class RouteController {
     public ResponseEntity<Iterable<RouteDto>> findAllRoutesDto() {
         Iterable<RouteDto> allRoutes = routeService.findAllRoutesDto();
         return new ResponseEntity<>(allRoutes, HttpStatus.OK);
-
+    }
 
     @GetMapping("{id}")
     public RouteEntity findRouteById(@PathVariable Long id) {

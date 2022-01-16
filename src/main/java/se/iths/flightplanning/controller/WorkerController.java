@@ -28,11 +28,11 @@ public class WorkerController {
         return new ResponseEntity<>(createdWorker, HttpStatus.CREATED);
     }
 
-    @GetMapping()
-    public ResponseEntity<Iterable<WorkerEntity>> findAllWorkers() {
-        Iterable<WorkerEntity> allStaff = workerService.findAllWorkers();
-        return new ResponseEntity<>(allStaff, HttpStatus.OK);
-    }
+//    @GetMapping()
+//    public ResponseEntity<Iterable<WorkerEntity>> findAllWorkers() {
+//        Iterable<WorkerEntity> allStaff = workerService.findAllWorkers();
+//        return new ResponseEntity<>(allStaff, HttpStatus.OK);
+//    }
 
     @GetMapping()
     public ResponseEntity<Iterable<WorkerDto>> findAllWorkersDto() {

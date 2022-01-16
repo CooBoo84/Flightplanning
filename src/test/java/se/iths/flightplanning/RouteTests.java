@@ -17,6 +17,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import se.iths.flightplanning.controller.RouteController;
 import se.iths.flightplanning.dto.RouteDto;
+import se.iths.flightplanning.entity.RouteEntity;
+import se.iths.flightplanning.service.RouteService;
 import se.iths.flightplanning.service.RouteServiceDto;
 
 import java.util.List;
@@ -33,7 +35,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 public class RouteTests extends WebSecurityConfigurerAdapter {
 
     @MockBean
-    RouteServiceDto routeServiceDto;
+    RouteService routeServiceDto;
 
     @MockBean
     RouteDto routeDto;
@@ -52,7 +54,7 @@ public class RouteTests extends WebSecurityConfigurerAdapter {
     @Test
     void testReturnAllRoutesSuccess() throws Exception {
 
-        when(routeServiceDto.findAllRoutes()).thenReturn(List.of(new RouteDto("Gbg-Sth")));
+        when(routeServiceDto.findAllRoutes()).thenReturn(List.of(new RouteEntity("Gbg-Sth")));
 
         var result = mockMvc.perform(MockMvcRequestBuilders.get("/routes")
                         .with(SecurityMockMvcRequestPostProcessors.user("kungen").roles("ADMIN"))
@@ -65,7 +67,7 @@ public class RouteTests extends WebSecurityConfigurerAdapter {
     @Test
     void testReturnOneRouteSuccess() throws Exception {
 
-        when(routeServiceDto.getRouteById(1L)).thenReturn(Optional.of(new RouteDto( "LA-Gbg")));
+        when(routeServiceDto.getRouteById(1L)).thenReturn(Optional.of(new RouteEntity( "LA-Gbg")));
 
         var result = mockMvc.perform(MockMvcRequestBuilders.get("/routes/{id}", "1")
                         .with(SecurityMockMvcRequestPostProcessors.user("kungen").roles("ADMIN"))
@@ -77,7 +79,7 @@ public class RouteTests extends WebSecurityConfigurerAdapter {
 
     @Test
     public void testCreateRouteSuccess() throws Exception {
-        RouteDto route = new RouteDto("Lnd-Gbg");
+        RouteEntity route = new RouteEntity("Lnd-Gbg");
         Gson gson = new Gson();
         when(routeServiceDto.createRoute(route)).thenReturn(route);
 
@@ -93,7 +95,7 @@ public class RouteTests extends WebSecurityConfigurerAdapter {
 
     @Test
     void testDeleteRouteSuccess() throws Exception {
-        new RouteDto("Malmö-Umeå");
+        new RouteEntity("Malmö-Umeå");
         routeServiceDto.deleteRouteById(1L);
         Mockito.verify(routeServiceDto).deleteRouteById(1L);
     }

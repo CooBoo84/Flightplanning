@@ -17,6 +17,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import se.iths.flightplanning.controller.WorkerController;
 import se.iths.flightplanning.dto.WorkerDto;
+import se.iths.flightplanning.entity.WorkerEntity;
+import se.iths.flightplanning.service.WorkerService;
 import se.iths.flightplanning.service.WorkerServiceDto;
 
 import java.util.List;
@@ -33,7 +35,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 public class WorkerTests extends WebSecurityConfigurerAdapter {
 
     @MockBean
-    WorkerServiceDto workerServiceDto;
+    WorkerService workerService;
 
     @MockBean
     WorkerDto workerDto;
@@ -52,7 +54,7 @@ public class WorkerTests extends WebSecurityConfigurerAdapter {
     @Test
     void testReturnAllWorkersSuccess() throws Exception {
 
-        when(workerServiceDto.findAllWorkers()).thenReturn(List.of(new WorkerDto(10, 100)));
+        when(workerService.findAllWorkers()).thenReturn(List.of(new WorkerEntity(10, 100)));
 
         var result = mockMvc.perform(MockMvcRequestBuilders.get("/workers")
                         .with(SecurityMockMvcRequestPostProcessors.user("kungen").roles("ADMIN"))
@@ -65,7 +67,7 @@ public class WorkerTests extends WebSecurityConfigurerAdapter {
     @Test
     void testReturnOneWorkerSuccess() throws Exception {
 
-        when(workerServiceDto.getWorkerById(1L)).thenReturn(Optional.of(new WorkerDto(20, 200)));
+        when(workerService.getWorkerById(1L)).thenReturn(Optional.of(new WorkerEntity(20, 200)));
 
         var result = mockMvc.perform(MockMvcRequestBuilders.get("/workers/{id}", "1")
                         .with(SecurityMockMvcRequestPostProcessors.user("kungen").roles("ADMIN"))
@@ -77,9 +79,9 @@ public class WorkerTests extends WebSecurityConfigurerAdapter {
 
     @Test
     public void testCreateWorkerSuccess() throws Exception {
-        WorkerDto worker = new WorkerDto(5, 8);
+        WorkerEntity worker = new WorkerEntity(5, 8);
         Gson gson = new Gson();
-        when(workerServiceDto.createWorker(worker)).thenReturn(worker);
+        when(workerService.createWorker(worker)).thenReturn(worker);
 
         var result = mockMvc.perform(MockMvcRequestBuilders.post("/workers")
                         .with(SecurityMockMvcRequestPostProcessors.user("kungen").roles("ADMIN"))
@@ -94,8 +96,8 @@ public class WorkerTests extends WebSecurityConfigurerAdapter {
     @Test
     void testDeleteRouteSuccess() throws Exception {
         new WorkerDto(1 , 1);
-        workerServiceDto.deleteWorkerById(1L);
-        Mockito.verify(workerServiceDto).deleteWorkerById(1L);
+        workerService.deleteWorkerById(1L);
+        Mockito.verify(workerService).deleteWorkerById(1L);
     }
 
 }

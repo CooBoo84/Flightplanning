@@ -20,6 +20,7 @@ public class CustomUserDetailService implements UserDetailsService {
         final UserEntity user = userRepository.findByUsername(username);
         System.out.println("------------------- username --------------------- " + username);
         System.out.println("------------------- user --------------------- " + user);
+        System.out.println("------------------- role --------------------- " + user.getRoles());
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
