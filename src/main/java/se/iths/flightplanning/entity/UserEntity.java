@@ -56,13 +56,6 @@ public class UserEntity implements Serializable {
         this.admin = admin;
     }
 
-    public UserEntity(String firstName, String lastName, String email, String telephone) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.telephone = telephone;
-    }
-
     public UserEntity() {
     }
 

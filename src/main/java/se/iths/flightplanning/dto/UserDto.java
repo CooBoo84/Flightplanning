@@ -18,27 +18,20 @@ public class UserDto implements Serializable {
     private String telephone;
     private String username;
     private String password;
+    private boolean admin;
 
 
-//    public UserDto(String firstName, String lastName, String email, String telephone,String username,String password) {
-//       // this.id = id;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.email = email;
-//        this.telephone = telephone;
-//        this.username = username;
-//        this.password = password;
-//    }
 
-
-    public UserDto(String firstName, String lastName, String email, String telephone) {
-        // this.id = id;
+    public UserDto(String firstName, String lastName, String email, String telephone, String username, String password, boolean admin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.telephone = telephone;
-
+        this.username = username;
+        this.password = password;
+        this.admin = admin;
     }
+
 
     private Set<RoleDto> roles = new HashSet<>();
 
@@ -65,13 +58,6 @@ public class UserDto implements Serializable {
         this.roles = roles;
     }
 
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
 
     public String getFirstName() {
         return firstName;
@@ -119,6 +105,14 @@ public class UserDto implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
 }
