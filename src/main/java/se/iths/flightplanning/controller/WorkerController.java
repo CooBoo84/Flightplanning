@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import se.iths.flightplanning.dto.WorkerDto;
 
 import org.springframework.web.server.ResponseStatusException;
-import se.iths.flightplanning.entity.RouteEntity;
 
 import se.iths.flightplanning.entity.WorkerEntity;
 import se.iths.flightplanning.service.WorkerService;
@@ -28,13 +27,13 @@ public class WorkerController {
         return new ResponseEntity<>(createdWorker, HttpStatus.CREATED);
     }
 
-//    @GetMapping()
-//    public ResponseEntity<Iterable<WorkerEntity>> findAllWorkers() {
-//        Iterable<WorkerEntity> allStaff = workerService.findAllWorkers();
-//        return new ResponseEntity<>(allStaff, HttpStatus.OK);
-//    }
-
     @GetMapping()
+    public ResponseEntity<Iterable<WorkerEntity>> findAllWorkers() {
+        Iterable<WorkerEntity> allStaff = workerService.findAllWorkers();
+        return new ResponseEntity<>(allStaff, HttpStatus.OK);
+    }
+
+    @GetMapping("dto")
     public ResponseEntity<Iterable<WorkerDto>> findAllWorkersDto() {
         Iterable<WorkerDto> allStaff = workerService.findAllWorkersDto();
         return new ResponseEntity<>(allStaff, HttpStatus.OK);

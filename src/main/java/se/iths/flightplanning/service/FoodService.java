@@ -25,11 +25,9 @@ public class FoodService implements FoodServiceDto {
         return foodRepository.save(foodEntity);
     }
 
-
     public void deleteFoodById(Long id) {
         foodRepository.deleteById(id);
     }
-
 
     public Iterable<FoodEntity> findAllFood() {
         return foodRepository.findAll();
@@ -39,9 +37,7 @@ public class FoodService implements FoodServiceDto {
         return foodMapper.mapp(foodRepository.findAll());
     }
 
-
     public Optional<FoodEntity> getFoodById(Long id) {
         return foodRepository.findById(id);
     }
-
 }

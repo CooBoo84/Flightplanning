@@ -1,7 +1,7 @@
-package se.iths.flightplanning;
+package se.iths.flightplanning.controller;
 
 import com.google.gson.Gson;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import se.iths.flightplanning.controller.WorkerController;
-import se.iths.flightplanning.dto.WorkerDto;
-import se.iths.flightplanning.entity.WorkerEntity;
-import se.iths.flightplanning.service.WorkerService;
-import se.iths.flightplanning.service.WorkerServiceDto;
+import se.iths.flightplanning.controller.FoodController;
+import se.iths.flightplanning.dto.FoodDto;
+import se.iths.flightplanning.entity.FoodEntity;
+import se.iths.flightplanning.service.FoodService;
+import se.iths.flightplanning.service.FoodServiceDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,34 +29,34 @@ import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = WorkerController.class)
+@SpringBootTest(classes = FoodController.class)
 @AutoConfigureMockMvc
 @EnableWebMvc
-public class WorkerTests extends WebSecurityConfigurerAdapter {
+public class FoodTests extends WebSecurityConfigurerAdapter {
 
     @MockBean
-    WorkerService workerService;
+    FoodService foodServiceDto;
 
     @MockBean
-    WorkerEntity workerDto;
+    FoodEntity foodDto;
 
     @MockBean
-    WorkerController workerController;
+    FoodController foodController;
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void testWorkerControllerInitializedCorrectly() {
-        assertThat(workerController).isNotNull();
+    public void testFoodControllerInitializedCorrectly() {
+        assertThat(foodController).isNotNull();
     }
 
     @Test
-    void testReturnAllWorkersSuccess() throws Exception {
+    public void testReturnAllFoodSuccess() throws Exception {
 
-        when(workerService.findAllWorkers()).thenReturn(List.of(new WorkerEntity(10, 100)));
+        when(foodServiceDto.findAllFood()).thenReturn(List.of(new FoodEntity("Kebab")));
 
-        var result = mockMvc.perform(MockMvcRequestBuilders.get("/workers")
+        var result = mockMvc.perform(MockMvcRequestBuilders.get("/food")
                         .with(SecurityMockMvcRequestPostProcessors.user("kungen").roles("ADMIN"))
                         .with(csrf())
                         .accept(MediaType.APPLICATION_JSON))
@@ -65,11 +65,11 @@ public class WorkerTests extends WebSecurityConfigurerAdapter {
     }
 
     @Test
-    void testReturnOneWorkerSuccess() throws Exception {
+    public void testReturnOneFoodSuccess() throws Exception {
 
-        when(workerService.getWorkerById(1L)).thenReturn(Optional.of(new WorkerEntity(20, 200)));
+        when(foodServiceDto.getFoodById(1L)).thenReturn(Optional.of(new FoodEntity( "Pizza")));
 
-        var result = mockMvc.perform(MockMvcRequestBuilders.get("/workers/{id}", "1")
+        var result = mockMvc.perform(MockMvcRequestBuilders.get("/food/{id}", "1")
                         .with(SecurityMockMvcRequestPostProcessors.user("kungen").roles("ADMIN"))
                         .with(csrf())
                         .accept(MediaType.APPLICATION_JSON))
@@ -78,26 +78,26 @@ public class WorkerTests extends WebSecurityConfigurerAdapter {
     }
 
     @Test
-    public void testCreateWorkerSuccess() throws Exception {
-        WorkerEntity worker = new WorkerEntity(5, 8);
+    public void testCreateFoodSuccess() throws Exception {
+        FoodEntity food = new FoodEntity("Korvstroganoff");
         Gson gson = new Gson();
-        when(workerService.createWorker(worker)).thenReturn(worker);
+        when(foodServiceDto.createFood(food)).thenReturn(food);
 
-        var result = mockMvc.perform(MockMvcRequestBuilders.post("/workers")
+        var result = mockMvc.perform(MockMvcRequestBuilders.post("/food")
                         .with(SecurityMockMvcRequestPostProcessors.user("kungen").roles("ADMIN"))
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(gson.toJson(worker))
+                        .content(gson.toJson(food))
                         .accept(MediaType.APPLICATION_JSON))
                 .andReturn();
         assertThat(result.getResponse().getStatus()).isEqualTo(200);
     }
 
     @Test
-    void testDeleteRouteSuccess() throws Exception {
-        new WorkerDto(1 , 1);
-        workerService.deleteWorkerById(1L);
-        Mockito.verify(workerService).deleteWorkerById(1L);
+    public void testDeleteFoodSuccess() throws Exception {
+        new FoodEntity("Ostron");
+        foodServiceDto.deleteFoodById(1L);
+        Mockito.verify(foodServiceDto).deleteFoodById(1L);
     }
 
 }

@@ -21,23 +21,19 @@ public class AirplaneService implements AirplaneServiceDto {
         this.airplaneMapper = airplaneMapper;
     }
 
-
     public AirplaneEntity createPlane(AirplaneEntity airplaneEntity) {
         if (airplaneEntity.getAirplaneName().isEmpty())
             throw new RuntimeException();
         return airplaneRepository.save(airplaneEntity);
     }
 
-
     public Iterable<AirplaneEntity> findAllPlanes() {
         return airplaneRepository.findAll();
     }
 
-
     public Optional<AirplaneEntity> getAirplaneById(Long id) {
         return airplaneRepository.findById(id);
     }
-
 
     public void deleteById(Long id) {
         airplaneRepository.deleteById(id);
@@ -45,8 +41,6 @@ public class AirplaneService implements AirplaneServiceDto {
 
     @Override
     public Iterable<AirplaneDto> findAllPlanesDTO() {
-
         return airplaneMapper.mapp(airplaneRepository.findAll());
-
     }
 }

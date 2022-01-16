@@ -33,7 +33,7 @@ public class AirplaneController {
             throw new EmptyListException("Airplane list is empty.");
     }
 
-    @GetMapping("getDTO")
+    @GetMapping("dto")
     public ResponseEntity<Iterable<AirplaneDto>> findAllPlanesDTO() {
         Iterable<AirplaneDto> allPlanes = airplaneService.findAllPlanesDTO();
         if (allPlanes.iterator().hasNext())

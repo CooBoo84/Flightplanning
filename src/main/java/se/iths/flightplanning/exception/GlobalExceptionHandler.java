@@ -38,19 +38,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST, errorMessage, ex));
     }
 
-    // TODO: Check how to allow request methods on Java level
-//    @Override
-//    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(
-//            HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-//        logger.info(ex.getClass().getName());
-//        StringBuilder builder = new StringBuilder();
-//        builder.append(ex.getMethod());
-//        builder.append(" method is not supported for this request. Supported methods are ");
-//        Objects.requireNonNull(ex.getSupportedHttpMethods()).forEach(t -> builder.append(t + " "));
-//
-//        return buildResponseEntity(new ApiError(HttpStatus.METHOD_NOT_ALLOWED, builder.toString(), ex));
-//    }
-
     @ExceptionHandler({Exception.class})
     public ResponseEntity<Object> handleAll(Exception ex, WebRequest request) {
         logger.info(ex.getClass().getName());

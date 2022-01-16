@@ -28,21 +28,14 @@ public class UserController {
     private JmsTemplate jmsTemplate;
 
     private final UserService userService;
-    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-//    @PostMapping("signup")
-//    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user) {
-//        UserEntity createdUser = userService.createUser(user);
-//        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
-//    }
-    @PostMapping("signup/dto")
-    public ResponseEntity<UserDto> createUserDTO(@RequestBody UserEntity user) {
-        UserDto createdUser = userService.createUserDto(user);
-        jmsTemplate.convertAndSend("user", user);
+    @PostMapping("signup")
+    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user) {
+        UserEntity createdUser = userService.createUser(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 

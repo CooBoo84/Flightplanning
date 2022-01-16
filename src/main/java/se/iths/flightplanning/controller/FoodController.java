@@ -33,7 +33,7 @@ public class FoodController {
             throw new EmptyListException("Food list is empty.");
     }
 
-    @GetMapping("getfoodDto")
+    @GetMapping("dto")
     public ResponseEntity<Iterable<FoodDto>> findAllFoodDTO() {
         Iterable<FoodDto> allFood = foodService.findAllFoodDTO();
         if (allFood.iterator().hasNext())
@@ -41,7 +41,6 @@ public class FoodController {
         else
             throw new EmptyListException("Food list is empty.");
     }
-
 
     @GetMapping("{id}")
     public FoodEntity findFoodById(@PathVariable Long id) {
@@ -61,5 +60,4 @@ public class FoodController {
     public String getFooByIdUsingQueryParam(@RequestParam String id) {
         return "ID: " + id;
     }
-
 }

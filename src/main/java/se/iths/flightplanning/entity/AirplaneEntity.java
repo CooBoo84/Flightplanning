@@ -74,6 +74,7 @@ public class AirplaneEntity {
         this.planeNames = planeNames;
     }
 
+    @JsonIgnore
     public Set<WorkerEntity> getStaff() {
         return staff;
     }
