@@ -48,4 +48,11 @@ public class RoleEntity {
     public void setUsers(Set<UserEntity> users) {
         this.users = users;
     }
+
+    @Override
+    public String toString() {
+        return "RoleEntity{" +
+                "role='" + role +
+                '}';
+    }
 }

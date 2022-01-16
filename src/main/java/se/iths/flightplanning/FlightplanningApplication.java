@@ -20,7 +20,7 @@ public class FlightplanningApplication {
 
         JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
 
-        UserEntity customer = new UserEntity("Sven", "Gurka", "sven@gurka.se", "0315756856", "username", "password");
+        UserEntity customer = new UserEntity("Sven", "Gurka", "sven@gurka.se", "0315756856", "username", "password",true);
 
         jmsTemplate.convertAndSend("user", customer);
     }

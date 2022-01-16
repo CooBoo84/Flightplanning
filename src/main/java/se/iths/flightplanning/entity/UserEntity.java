@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -20,6 +21,7 @@ public class UserEntity implements Serializable {
     private String telephone;
     private String username;
     private String password;
+    private boolean admin;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<RoleEntity> roles = new HashSet<>();
@@ -44,13 +46,14 @@ public class UserEntity implements Serializable {
         routeName.getUsers().add(this);
     }
 
-    public UserEntity(String firstName, String lastName, String email, String telephone, String username, String password) {
+    public UserEntity(String firstName, String lastName, String email, String telephone, String username, String password, Boolean admin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.telephone = telephone;
         this.username = username;
         this.password = password;
+        this.admin = admin;
     }
 
     public UserEntity(String firstName, String lastName, String email, String telephone) {
@@ -61,14 +64,6 @@ public class UserEntity implements Serializable {
     }
 
     public UserEntity() {
-    }
-
-    public Set<RoleEntity> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<RoleEntity> roles) {
-        this.roles = roles;
     }
 
     public Long getId() {
@@ -123,6 +118,7 @@ public class UserEntity implements Serializable {
         this.password = password;
     }
 
+    @JsonIgnore
     public Set<RouteEntity> getRouteNames() {
         return routeNames;
     }
@@ -130,4 +126,22 @@ public class UserEntity implements Serializable {
     public void setRouteNames(Set<RouteEntity> routeNames) {
         this.routeNames = routeNames;
     }
+
+    @JsonIgnore
+    public Set<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleEntity> roles) {
+        this.roles = roles;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
 }

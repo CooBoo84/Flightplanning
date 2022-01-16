@@ -31,12 +31,12 @@ public class UserService implements UserServiceDto{
         this.roleMapper = roleMapper;
     }
 
-    public UserEntity createUser(UserEntity userEntity) {
-        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-        RoleEntity roleToAdd = roleRepository.findByRole("ROLE_USER");
-        userEntity.addRole(roleToAdd);
-        return userRepository.save(userEntity);
-    }
+//    public UserEntity createUser(UserEntity userEntity) {
+//        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+//        RoleEntity roleToAdd = roleRepository.findByRole("ROLE_USER");
+//        userEntity.addRole(roleToAdd);
+//        return userRepository.save(userEntity);
+//    }
 
     public void deleteUser(Long id) {
         UserEntity foundUser = userRepository.findById(id).orElseThrow(EntityNotFoundException::new);  //Optional förhindrar nullpointExceptions
@@ -49,13 +49,7 @@ public class UserService implements UserServiceDto{
 
     @Override
     public UserDto createUserDto(UserEntity user) {
-//        RoleEntity roleToAdd = roleRepository.findByRole("ROLE_USER");
-//        RoleDto addRole = roleMapper.mapp(roleToAdd);
-//
-//        userDto.addRole(addRole);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        RoleEntity roleToAdd = roleRepository.findByRole("ROLE_VIP");
-        user.addRole(roleToAdd);
         userRepository.save(user);
         UserDto userDto = userMapper.mapp(user);
 
