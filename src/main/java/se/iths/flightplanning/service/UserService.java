@@ -14,7 +14,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
-public class UserService implements UserServiceDto{
+public class UserService implements UserServiceDto {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -31,12 +31,12 @@ public class UserService implements UserServiceDto{
         this.roleMapper = roleMapper;
     }
 
-//    public UserEntity createUser(UserEntity userEntity) {
-//        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-//        RoleEntity roleToAdd = roleRepository.findByRole("ROLE_USER");
-//        userEntity.addRole(roleToAdd);
-//        return userRepository.save(userEntity);
-//    }
+    public UserEntity createUser(UserEntity userEntity) {
+        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        RoleEntity roleToAdd = roleRepository.findByRole("ROLE_USER");
+        userEntity.addRole(roleToAdd);
+        return userRepository.save(userEntity);
+    }
 
     public void deleteUser(Long id) {
         UserEntity foundUser = userRepository.findById(id).orElseThrow(EntityNotFoundException::new);  //Optional förhindrar nullpointExceptions
@@ -47,25 +47,12 @@ public class UserService implements UserServiceDto{
         return userRepository.findById(id);
     }
 
-    @Override
-    public UserDto createUserDto(UserEntity user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        UserDto userDto = userMapper.mapp(user);
-
-        return userDto;
-    }
-
-
     public Iterable<UserEntity> findAllUsers() {
         return userRepository.findAll();
     }
 
-
     public Iterable<UserDto> findAllUsersDTO() {
-
         return userMapper.mapp(userRepository.findAll());
-
     }
 
 }

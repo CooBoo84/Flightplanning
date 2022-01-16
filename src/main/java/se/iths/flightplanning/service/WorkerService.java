@@ -3,9 +3,6 @@ package se.iths.flightplanning.service;
 import org.springframework.stereotype.Service;
 
 import se.iths.flightplanning.dto.WorkerDto;
-
-import se.iths.flightplanning.entity.RouteEntity;
-
 import se.iths.flightplanning.entity.WorkerEntity;
 import se.iths.flightplanning.mappers.WorkerMapper;
 import se.iths.flightplanning.repository.WorkerRepository;
@@ -13,7 +10,7 @@ import se.iths.flightplanning.repository.WorkerRepository;
 import java.util.Optional;
 
 @Service
-public class WorkerService implements WorkerServiceDto{
+public class WorkerService implements WorkerServiceDto {
 
     private final WorkerRepository workerRepository;
     private final WorkerMapper workerMapper;
@@ -23,7 +20,7 @@ public class WorkerService implements WorkerServiceDto{
         this.workerMapper = workerMapper;
     }
 
-    public WorkerEntity createWorker(WorkerEntity workerEntity){
+    public WorkerEntity createWorker(WorkerEntity workerEntity) {
         return workerRepository.save(workerEntity);
     }
 

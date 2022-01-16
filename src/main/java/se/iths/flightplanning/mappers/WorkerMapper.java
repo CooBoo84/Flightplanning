@@ -1,9 +1,7 @@
 package se.iths.flightplanning.mappers;
 
 import org.springframework.stereotype.Component;
-import se.iths.flightplanning.dto.AirplaneDto;
 import se.iths.flightplanning.dto.WorkerDto;
-import se.iths.flightplanning.entity.AirplaneEntity;
 import se.iths.flightplanning.entity.WorkerEntity;
 
 import java.util.List;
