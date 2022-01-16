@@ -13,6 +13,7 @@ import se.iths.flightplanning.entity.UserEntity;
 import se.iths.flightplanning.repository.UserRepository;
 import se.iths.flightplanning.service.UserService;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -33,13 +34,13 @@ public class UserController {
         this.userService = userService;
     }
 
-//    @PostMapping("signup")
-//    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user) {
-//        UserEntity createdUser = userService.createUser(user);
-//        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
-//    }
     @PostMapping("signup")
-    public ResponseEntity<UserDto> createUser(@RequestBody UserEntity user) {
+    public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user) {
+        UserEntity createdUser = userService.createUser(user);
+        return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
+    }
+    @PostMapping("signup/dto")
+    public ResponseEntity<UserDto> createUserDTO(@RequestBody UserEntity user) {
         UserDto createdUser = userService.createUserDto(user);
         jmsTemplate.convertAndSend("user", user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
@@ -57,9 +58,15 @@ public class UserController {
         return new ResponseEntity<>(foundUser, HttpStatus.OK);
     }
 
-    @GetMapping()
+    @GetMapping("entity")
     public ResponseEntity<Iterable<UserEntity>> findAllUsers() {
         Iterable<UserEntity> allUsers = userService.findAllUsers();
+        return new ResponseEntity<>(allUsers, HttpStatus.OK);
+    }
+
+    @GetMapping("dto")
+    public ResponseEntity<Iterable<UserDto>> findAllUsersDTO() {
+       Iterable<UserDto> allUsers = userService.findAllUsersDTO();
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
 }

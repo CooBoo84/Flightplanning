@@ -7,11 +7,11 @@ import java.util.Optional;
 
 public interface FoodServiceDto {
 
-    List<FoodDto> findAllFood();
+    Iterable<FoodDto> findAllFoodDTO();
 
-    Optional<FoodDto> getFoodById(Long id);
-
-    FoodDto createFood(FoodDto foodDto);
+//    Optional<FoodDto> getFoodById(Long id);
+//
+//    FoodDto createFood(FoodDto foodDto);
 
     void deleteFoodById(Long id);
 }

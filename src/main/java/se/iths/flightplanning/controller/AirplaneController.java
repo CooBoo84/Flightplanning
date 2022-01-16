@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import se.iths.flightplanning.dto.AirplaneDto;
 import se.iths.flightplanning.entity.AirplaneEntity;
 import se.iths.flightplanning.exception.EmptyListException;
 import se.iths.flightplanning.service.AirplaneService;
@@ -26,6 +27,15 @@ public class AirplaneController {
     @GetMapping()
     public ResponseEntity<Iterable<AirplaneEntity>> findAllPlanes() {
         Iterable<AirplaneEntity> allPlanes = airplaneService.findAllPlanes();
+        if (allPlanes.iterator().hasNext())
+            return new ResponseEntity<>(allPlanes, HttpStatus.OK);
+        else
+            throw new EmptyListException("Airplane list is empty.");
+    }
+
+    @GetMapping("getDTO")
+    public ResponseEntity<Iterable<AirplaneDto>> findAllPlanesDTO() {
+        Iterable<AirplaneDto> allPlanes = airplaneService.findAllPlanesDTO();
         if (allPlanes.iterator().hasNext())
             return new ResponseEntity<>(allPlanes, HttpStatus.OK);
         else

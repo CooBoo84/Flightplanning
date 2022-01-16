@@ -1,5 +1,7 @@
 package se.iths.flightplanning.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -51,8 +53,16 @@ public class UserEntity implements Serializable {
         this.password = password;
     }
 
+    public UserEntity(String firstName, String lastName, String email, String telephone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.telephone = telephone;
+    }
+
     public UserEntity() {
     }
+
     public Set<RoleEntity> getRoles() {
         return roles;
     }

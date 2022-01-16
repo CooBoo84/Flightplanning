@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import se.iths.flightplanning.dto.UserDto;
+import se.iths.flightplanning.entity.UserEntity;
 import se.iths.flightplanning.security.JwtProvider;
 import se.iths.flightplanning.security.JwtResponse;
 
@@ -25,7 +26,7 @@ public class AuthController {
     JwtProvider tokenProvider;
 
     @PostMapping("/signin")
-    public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody UserDto login) {
+    public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody UserEntity login) {
         System.out.println(login.getUsername());
         System.out.println(login.getPassword());
         Authentication authentication = authenticationManager

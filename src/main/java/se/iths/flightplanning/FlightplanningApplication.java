@@ -31,6 +31,7 @@ public class FlightplanningApplication {
         return (args) -> {
             roleRepository.save(new RoleEntity("ROLE_ADMIN"));
             roleRepository.save(new RoleEntity("ROLE_USER"));
+            roleRepository.save(new RoleEntity("ROLE_VIP"));
         };
     }
 

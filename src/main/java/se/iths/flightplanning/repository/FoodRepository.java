@@ -1,13 +1,15 @@
 package se.iths.flightplanning.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import se.iths.flightplanning.entity.FoodEntity;
 
-@Repository
-public interface FoodRepository extends CrudRepository<FoodEntity, Long> {
+import java.util.List;
 
-//    List<FoodEntity> findAllById(long id);
+@Repository
+public interface FoodRepository extends JpaRepository<FoodEntity, Long> {
+    List<FoodEntity> findAllById(long id);
 //
 //    FoodDto findFoodById(long id);
 

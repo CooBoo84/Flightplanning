@@ -9,9 +9,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import se.iths.flightplanning.service.CustomUserDetailService;
 
@@ -55,7 +59,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
+//<<<<<<< HEAD
                 .antMatchers("/signin", "/login", "/", "/admin", "/application", "/auth/signin", "/users/signup", "/employees", "/customers", "/roles", "/h2-console/**").permitAll()
+/*=======
+                .antMatchers("/signin", "/login", "/", "/application", "/auth/signin", "/users/signup","/users/signup/dto","/users/entity","/users/dto", "/employees", "/customers", "/roles").permitAll()
+                .antMatchers(  "/admin").hasRole("VIP")
+>>>>>>> e2f8acc9adebdb06e01af1c2bc71f3c535f706dd*/
                 .antMatchers("/**").authenticated()
                 .and()
                 .exceptionHandling()
@@ -65,4 +74,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
+
+
+
+
+
 }
