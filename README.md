@@ -1,6 +1,10 @@
 ## Flightplanning - Laboration
 Laboration with myself, Hans, Gustaf and Athanasios.
 
+All endpoints are unlocked för all to use.
+But when you are going to handle with airplane endpoints. You need to be authorized first.
+After authorized, you have to use your token as "Bearer Token" for it to work.
+
 ## Endpoints
 - [Users](#users)
 - [Auth](#auth)
