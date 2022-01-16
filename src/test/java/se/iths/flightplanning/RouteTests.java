@@ -1,7 +1,7 @@
 package se.iths.flightplanning;
 
 import com.google.gson.Gson;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +52,7 @@ public class RouteTests extends WebSecurityConfigurerAdapter {
     }
 
     @Test
-    void testReturnAllRoutesSuccess() throws Exception {
+    public void testReturnAllRoutesSuccess() throws Exception {
 
         when(routeServiceDto.findAllRoutes()).thenReturn(List.of(new RouteEntity("Gbg-Sth")));
 
@@ -65,7 +65,7 @@ public class RouteTests extends WebSecurityConfigurerAdapter {
     }
 
     @Test
-    void testReturnOneRouteSuccess() throws Exception {
+    public void testReturnOneRouteSuccess() throws Exception {
 
         when(routeServiceDto.getRouteById(1L)).thenReturn(Optional.of(new RouteEntity( "LA-Gbg")));
 
@@ -94,7 +94,7 @@ public class RouteTests extends WebSecurityConfigurerAdapter {
     }
 
     @Test
-    void testDeleteRouteSuccess() throws Exception {
+    public void testDeleteRouteSuccess() throws Exception {
         new RouteEntity("Malmö-Umeå");
         routeServiceDto.deleteRouteById(1L);
         Mockito.verify(routeServiceDto).deleteRouteById(1L);

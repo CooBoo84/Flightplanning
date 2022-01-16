@@ -1,7 +1,7 @@
 package se.iths.flightplanning;
 
 import com.google.gson.Gson;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +16,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import se.iths.flightplanning.controller.AirplaneController;
-import se.iths.flightplanning.dto.AirplaneDto;
 import se.iths.flightplanning.entity.AirplaneEntity;
 import se.iths.flightplanning.repository.AirplaneRepository;
 import se.iths.flightplanning.service.AirplaneService;
-import se.iths.flightplanning.service.AirplaneServiceDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -59,7 +57,7 @@ public class AirplaneTests extends WebSecurityConfigurerAdapter {
     }
 
     @Test
-    void testReturnAllAirplanesSuccess() throws Exception {
+    public void testReturnAllAirplanesSuccess() throws Exception {
 
         when(airplaneService.findAllPlanes()).thenReturn(List.of(new AirplaneEntity("Model-X", 222, 22)));
 
@@ -72,7 +70,7 @@ public class AirplaneTests extends WebSecurityConfigurerAdapter {
     }
 
     @Test
-    void testReturnOneAirplaneSuccess() throws Exception {
+    public void testReturnOneAirplaneSuccess() throws Exception {
 
         when(airplaneService.getAirplaneById(1L)).thenReturn(Optional.of(new AirplaneEntity( "Model-Y", 333, 33)));
 
@@ -101,7 +99,7 @@ public class AirplaneTests extends WebSecurityConfigurerAdapter {
     }
 
     @Test
-    void testDeleteAirplaneSuccess() throws Exception {
+    public void testDeleteAirplaneSuccess() throws Exception {
         new AirplaneEntity("Model-Z", 333, 33);
         airplaneService.deleteById(1L);
         Mockito.verify(airplaneService).deleteById(1L);

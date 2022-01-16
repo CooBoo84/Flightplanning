@@ -1,7 +1,7 @@
 package se.iths.flightplanning;
 
 import com.google.gson.Gson;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +52,7 @@ public class WorkerTests extends WebSecurityConfigurerAdapter {
     }
 
     @Test
-    void testReturnAllWorkersSuccess() throws Exception {
+    public void testReturnAllWorkersSuccess() throws Exception {
 
         when(workerService.findAllWorkers()).thenReturn(List.of(new WorkerEntity(10, 100)));
 
@@ -65,7 +65,7 @@ public class WorkerTests extends WebSecurityConfigurerAdapter {
     }
 
     @Test
-    void testReturnOneWorkerSuccess() throws Exception {
+    public void testReturnOneWorkerSuccess() throws Exception {
 
         when(workerService.getWorkerById(1L)).thenReturn(Optional.of(new WorkerEntity(20, 200)));
 
@@ -94,7 +94,7 @@ public class WorkerTests extends WebSecurityConfigurerAdapter {
     }
 
     @Test
-    void testDeleteRouteSuccess() throws Exception {
+    public void testDeleteRouteSuccess() throws Exception {
         new WorkerDto(1 , 1);
         workerService.deleteWorkerById(1L);
         Mockito.verify(workerService).deleteWorkerById(1L);

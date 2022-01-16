@@ -1,7 +1,7 @@
 package se.iths.flightplanning;
 
 import com.google.gson.Gson;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +52,7 @@ public class FoodTests extends WebSecurityConfigurerAdapter {
     }
 
     @Test
-    void testReturnAllFoodSuccess() throws Exception {
+    public void testReturnAllFoodSuccess() throws Exception {
 
         when(foodServiceDto.findAllFood()).thenReturn(List.of(new FoodEntity("Kebab")));
 
@@ -65,7 +65,7 @@ public class FoodTests extends WebSecurityConfigurerAdapter {
     }
 
     @Test
-    void testReturnOneFoodSuccess() throws Exception {
+    public void testReturnOneFoodSuccess() throws Exception {
 
         when(foodServiceDto.getFoodById(1L)).thenReturn(Optional.of(new FoodEntity( "Pizza")));
 
@@ -94,7 +94,7 @@ public class FoodTests extends WebSecurityConfigurerAdapter {
     }
 
     @Test
-    void testDeleteFoodSuccess() throws Exception {
+    public void testDeleteFoodSuccess() throws Exception {
         new FoodEntity("Ostron");
         foodServiceDto.deleteFoodById(1L);
         Mockito.verify(foodServiceDto).deleteFoodById(1L);
