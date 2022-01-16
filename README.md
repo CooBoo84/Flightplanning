@@ -3,37 +3,77 @@ Laboration with myself, Hans, Gustaf and Athanasios.
 
 ## Endpoints
 - [Users](#users)
-- [Customers](#customers)
-- [Roles](#roles)
-- [Routes](#routes)
+- [Auth](#auth)
 - [Airplanes](#airplanes)
-- [Protections](#protections)
+- [Routes](#routes)
 - [Food](#food)
 - [Workers](#workers)
 ---
 ## Users
-
-## Customers
-
-## Roles
-
-## Routes
-### Create a new route
+### Create a new user as ADMIN
 ``
-POST - http://localhost:8080/FlightApp/routes
+POST - http://localhost:8080/FlightApp/users/signup
 ``
 - JSON-body
 ```
 {
-	"routeName": "Gbg-Sthlm"
+	"firstName": "Förnamn",
+	"lastName": "Efternamn",
+	"email": "mail@mail.com",
+	"telephone": "123131",
+	"username": "user1",
+	"password": "user",
+	"admin": true
 }
 ```
-### Get all routes
+
+### Get all users
 ``
-GET - http://localhost:8080/FlightApp/routes
+GET - http://localhost:8080/FlightApp/users
 ``
 
-## Airplanes
+### Get a users by ID
+``
+GET - http://localhost:8080/FlightApp/users/{id}
+``
+| Example |
+| --- |
+| localhost:8080/FlightApp/users/1 |
+
+### Delete a users by ID
+``
+DELETE - http://localhost:8080/FlightApp/users/{id}
+``
+| Example |
+| --- |
+| localhost:8080/FlightApp/users/1 |
+
+
+## Auth
+### Create token for your user
+``
+POST - http://localhost:8080/FlightApp/users/signup
+``
+- JSON-body
+```
+{
+	"firstName": "Förnamn",
+	"lastName": "Efternamn",
+	"email": "mail@mail.com",
+	"telephone": "123131",
+	"username": "user1",
+	"password": "user",
+	"admin": true
+}
+```
+- Output example
+```
+{
+	"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6M......."
+}
+```
+
+## Airplanes (You need to set admin = true, when creating a new user)
 ### Create a new airplane
 ``
 POST - http://localhost:8080/FlightApp/airplanes
@@ -68,30 +108,39 @@ DELETE - http://localhost:8080/FlightApp/airplanes/{id}
 | --- |
 | localhost:8080/FlightApp/airplanes/1 |
 
-## Protections
-### Create a new protection
+
+## Routes
+### Create a new route
 ``
-POST - http://localhost:8080/FlightApp/cancellationprotections
+POST - http://localhost:8080/FlightApp/routes
 ``
 - JSON-body
 ```
 {
-	"protection": "Yes"
+	"routeName": "Gbg-Sthlm"
 }
 ```
+### Get all routes
+``
+GET - http://localhost:8080/FlightApp/routes
+``
 
-### Get all protections
+### Get a route by ID
 ``
-GET - http://localhost:8080/FlightApp/cancellationprotections
-``
-
-### Delete protection by ID
-``
-DELETE - http://localhost:8080/FlightApp/cancellationprotections/{id}
+GET - http://localhost:8080/FlightApp/routes/{id}
 ``
 | Example |
 | --- |
-| localhost:8080/FlightApp/cancellationprotections/1 |
+| localhost:8080/FlightApp/routes/1 |
+
+### Delete a route by ID
+``
+DELETE - http://localhost:8080/FlightApp/routes/{id}
+``
+| Example |
+| --- |
+| localhost:8080/FlightApp/routes/1 |
+
 
 ## Food
 ### Create food
@@ -143,6 +192,14 @@ POST - http://localhost:8080/FlightApp/workers
 ``
 GET - http://localhost:8080/FlightApp/workers
 ``
+
+### Get worker by ID
+``
+GET - http://localhost:8080/FlightApp/workers/{id}
+``
+| Example |
+| --- |
+| localhost:8080/FlightApp/workers/1 |
 
 ### Delete worker by ID
 ``
