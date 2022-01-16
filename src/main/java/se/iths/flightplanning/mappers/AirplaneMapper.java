@@ -38,5 +38,4 @@ public class AirplaneMapper {
                 .map(this::mapp)
                 .collect(Collectors.toList());
     }
-
 }

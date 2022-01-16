@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 @Component
 public class UserMapper {
 
-
     public UserDto mapp(UserEntity userEntity) {
         return new UserDto(
                 userEntity.getFirstName(),
@@ -33,7 +32,6 @@ public class UserMapper {
                 userDto.getPassword(),
                 userDto.isAdmin());
     }
-
 
     public Optional<UserDto> mapp(Optional<UserEntity> optionalUserEntity) {
         if (optionalUserEntity.isEmpty())

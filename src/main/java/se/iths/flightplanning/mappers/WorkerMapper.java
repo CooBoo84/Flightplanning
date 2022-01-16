@@ -10,8 +10,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class WorkerMapper {
-    public WorkerMapper() {
-    }
+    public WorkerMapper() {    }
 
     public WorkerDto mapp(WorkerEntity workerEntity) {
         return new WorkerDto(

@@ -11,7 +11,6 @@ public class UserDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-   // private Long id;
     private String firstName;
     private String lastName;
     private String email;
@@ -19,7 +18,6 @@ public class UserDto implements Serializable {
     private String username;
     private String password;
     private boolean admin;
-
 
 
     public UserDto(String firstName, String lastName, String email, String telephone, String username, String password, boolean admin) {
@@ -32,7 +30,6 @@ public class UserDto implements Serializable {
         this.admin = admin;
     }
 
-
     private Set<RoleDto> roles = new HashSet<>();
 
     public void addRole(RoleDto role) {
@@ -43,7 +40,6 @@ public class UserDto implements Serializable {
     public void removeRole(RoleEntity role) {
         roles.remove(role);
         role.getUsers().remove(this);
-
     }
 
     public UserDto() {
@@ -57,7 +53,6 @@ public class UserDto implements Serializable {
     public void setRoles(Set<RoleDto> roles) {
         this.roles = roles;
     }
-
 
     public String getFirstName() {
         return firstName;
@@ -114,5 +109,4 @@ public class UserDto implements Serializable {
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
-
 }

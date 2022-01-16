@@ -28,7 +28,6 @@ public class UserController {
     private JmsTemplate jmsTemplate;
 
     private final UserService userService;
-    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -39,7 +38,6 @@ public class UserController {
         UserEntity createdUser = userService.createUser(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
-
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {

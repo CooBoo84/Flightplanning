@@ -35,13 +35,11 @@ public class RouteService implements RouteServiceDto {
     public RouteEntity createRoute(RouteEntity routeEntity) {
         if(routeEntity.getRouteName().isEmpty())
             throw new RuntimeException();
-
         return routeRepository.save(routeEntity);
     }
 
     public void deleteRouteById(Long id) {
-        RouteEntity foundRoute = routeRepository.findById(id).orElseThrow(EntityNotFoundException::new);  //Optional förhindrar nullpointExceptions
+        RouteEntity foundRoute = routeRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         routeRepository.deleteById(foundRoute.getId());
-
     }
 }

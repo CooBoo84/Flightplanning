@@ -33,7 +33,7 @@ public class WorkerController {
         return new ResponseEntity<>(allStaff, HttpStatus.OK);
     }
 
-    @GetMapping()
+    @GetMapping("dto")
     public ResponseEntity<Iterable<WorkerDto>> findAllWorkersDto() {
         Iterable<WorkerDto> allStaff = workerService.findAllWorkersDto();
         return new ResponseEntity<>(allStaff, HttpStatus.OK);
