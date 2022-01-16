@@ -38,7 +38,7 @@ public class FoodTests extends WebSecurityConfigurerAdapter {
     FoodService foodServiceDto;
 
     @MockBean
-    FoodDto foodDto;
+    FoodEntity foodDto;
 
     @MockBean
     FoodController foodController;

@@ -38,7 +38,7 @@ public class RouteTests extends WebSecurityConfigurerAdapter {
     RouteService routeServiceDto;
 
     @MockBean
-    RouteDto routeDto;
+    RouteEntity routeDto;
 
     @MockBean
     RouteController routeController;

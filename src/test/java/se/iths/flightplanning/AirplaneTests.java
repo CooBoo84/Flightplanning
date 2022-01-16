@@ -42,7 +42,7 @@ public class AirplaneTests extends WebSecurityConfigurerAdapter {
     AirplaneService airplaneService;
 
     @MockBean
-    AirplaneDto airplaneDto;
+    AirplaneEntity airplaneDto;
 
     @MockBean
     AirplaneController airplaneController;

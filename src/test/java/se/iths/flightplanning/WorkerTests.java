@@ -38,7 +38,7 @@ public class WorkerTests extends WebSecurityConfigurerAdapter {
     WorkerService workerService;
 
     @MockBean
-    WorkerDto workerDto;
+    WorkerEntity workerDto;
 
     @MockBean
     WorkerController workerController;
