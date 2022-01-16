@@ -18,18 +18,18 @@ public class UserRestControllerTest extends AbstractControllerTest {
 
    @Test
    public void getPersonForUser() throws Exception {
-      UserEntity user = new UserEntity("Test", "User", "test@user.se", "0315756856", "user", "password",false);
+      UserEntity user = new UserEntity("Test2", "User2", "test@user.se", "0315756856", "user2", "password2",false);
       userService.createUserWithoutRole(user);
-      final String token = getTokenForLogin("user", "password", getMockMvc());
+      final String token = getTokenForLogin("user2", "password2", getMockMvc());
 
       assertSuccessfulPersonRequest(token);
    }
 
    @Test
    public void getPersonForAdmin() throws Exception {
-      UserEntity user = new UserEntity("Test", "User", "test@user.se", "0315756856", "admin", "admin",true);
+      UserEntity user = new UserEntity("Test2", "User2", "test@user.se", "0315756856", "admin2", "admin2",true);
       userService.createUserWithoutRole(user);
-      final String token = getTokenForLogin("admin", "admin", getMockMvc());
+      final String token = getTokenForLogin("admin2", "admin2", getMockMvc());
 
       assertSuccessfulPersonRequest(token);
    }
@@ -48,8 +48,8 @@ public class UserRestControllerTest extends AbstractControllerTest {
          .andExpect(status().isOk())
          .andExpect(content().json(
             "{\n" +
-               "  \"firstName\" : \"Test\",\n" +
-               "  \"lastName\" : \"User\",\n" +
+               "  \"firstName\" : \"Test2\",\n" +
+               "  \"lastName\" : \"User2\",\n" +
                "  \"email\" : \"test@user.se\",\n" +
                "  \"telephone\" : \"0315756856\"\n" +
                "}"

@@ -11,7 +11,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static se.iths.flightplanning.LogInUtils.getTokenForLogin;
 
-
 public class AdminProtectedRestControllerTest extends AbstractControllerTest {
 
    @Autowired
@@ -52,4 +51,5 @@ public class AdminProtectedRestControllerTest extends AbstractControllerTest {
          .contentType(MediaType.APPLICATION_JSON))
          .andExpect(status().isUnauthorized());
    }
+
 }
