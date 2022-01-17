@@ -33,7 +33,11 @@ POST - http://localhost:8080/FlightApp/users/signup
 
 ### Get all users
 ``
-GET - http://localhost:8080/FlightApp/users
+GET - http://localhost:8080/FlightApp/users/entity
+``
+### Get all users (dto)
+``
+GET - http://localhost:8080/FlightApp/users/dto
 ``
 
 ### Get a users by ID
@@ -95,6 +99,10 @@ POST - http://localhost:8080/FlightApp/airplanes
 ``
 GET - http://localhost:8080/FlightApp/airplanes
 ``
+### Get all airplanes (dto)
+``
+GET - http://localhost:8080/FlightApp/airplanes/dto
+``
 
 ### Get a airplane by ID
 ``
@@ -127,6 +135,10 @@ POST - http://localhost:8080/FlightApp/routes
 ### Get all routes
 ``
 GET - http://localhost:8080/FlightApp/routes
+``
+### Get all routes (dto)
+``
+GET - http://localhost:8080/FlightApp/routes/dto
 ``
 
 ### Get a route by ID
@@ -162,6 +174,10 @@ POST - http://localhost:8080/FlightApp/food
 ``
 GET - http://localhost:8080/FlightApp/food
 ``
+### Get all food (dto)
+``
+GET - http://localhost:8080/FlightApp/food/dto
+``
 
 ### Get food by ID
 ``
@@ -195,6 +211,10 @@ POST - http://localhost:8080/FlightApp/workers
 ### Get all workers
 ``
 GET - http://localhost:8080/FlightApp/workers
+``
+### Get all workers (dto)
+``
+GET - http://localhost:8080/FlightApp/workers/dto
 ``
 
 ### Get worker by ID
