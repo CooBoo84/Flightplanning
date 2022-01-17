@@ -1,7 +1,8 @@
 package se.iths.flightplanning.controller;
 
 import com.google.gson.Gson;
-import org.junit.Test;
+//import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;

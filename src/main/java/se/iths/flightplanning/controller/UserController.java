@@ -36,6 +36,7 @@ public class UserController {
     @PostMapping("signup")
     public ResponseEntity<UserEntity> createUser(@RequestBody UserEntity user) {
         UserEntity createdUser = userService.createUser(user);
+        jmsTemplate.convertAndSend("user", user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 

@@ -1,7 +1,8 @@
 package se.iths.flightplanning.controller;
 
 import com.google.gson.Gson;
-import org.junit.Test;
+//import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,6 @@ import se.iths.flightplanning.controller.WorkerController;
 import se.iths.flightplanning.dto.WorkerDto;
 import se.iths.flightplanning.entity.WorkerEntity;
 import se.iths.flightplanning.service.WorkerService;
-import se.iths.flightplanning.service.WorkerServiceDto;
 
 import java.util.List;
 import java.util.Optional;

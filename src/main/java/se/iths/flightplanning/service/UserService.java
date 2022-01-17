@@ -38,6 +38,11 @@ public class UserService implements UserServiceDto {
         return userRepository.save(userEntity);
     }
 
+    public UserEntity createUserWithoutRole(UserEntity userEntity) {
+        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        return userRepository.save(userEntity);
+    }
+
     public void deleteUser(Long id) {
         UserEntity foundUser = userRepository.findById(id).orElseThrow(EntityNotFoundException::new);  //Optional förhindrar nullpointExceptions
         userRepository.deleteById(foundUser.getId());

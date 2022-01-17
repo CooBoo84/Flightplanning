@@ -1,7 +1,8 @@
 package se.iths.flightplanning.controller;
 
 import com.google.gson.Gson;
-import org.junit.Test;
+//import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import se.iths.flightplanning.controller.RouteController;
-import se.iths.flightplanning.dto.RouteDto;
 import se.iths.flightplanning.entity.RouteEntity;
 import se.iths.flightplanning.service.RouteService;
-import se.iths.flightplanning.service.RouteServiceDto;
 
 import java.util.List;
 import java.util.Optional;
