@@ -81,7 +81,7 @@ POST - http://localhost:8080/FlightApp/users/signup
 }
 ```
 
-## Airplanes (You need to set admin = true, when creating a new user)
+## Airplanes
 ### Create a new airplane
 ``
 POST - http://localhost:8080/FlightApp/airplanes
