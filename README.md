@@ -5,6 +5,14 @@ All endpoints are unlocked för all to use.
 But when you are going to handle with airplane endpoints. You need to be authorized first.
 After authorized, you have to use your token as "Bearer Token" for it to work.
 
+## Artifact download link
+
+[https://github.com/CooBoo84/Flightplanning/packages/1142536](https://github.com/CooBoo84/Flightplanning/packages/1142536)
+
+## CI link with test reports in maven build
+
+[https://github.com/CooBoo84/Flightplanning/actions](https://github.com/CooBoo84/Flightplanning/actions)
+
 ## Endpoints
 - [Users](#users)
 - [Auth](#auth)
