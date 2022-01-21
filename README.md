@@ -68,7 +68,7 @@ DELETE - http://localhost:8080/FlightApp/users/{id}
 ## Auth
 ### Create token for your user
 ``
-POST - http://localhost:8080/FlightApp/users/signup
+POST - http://localhost:8080/FlightApp/auth/signin
 ``
 - JSON-body
 ```
